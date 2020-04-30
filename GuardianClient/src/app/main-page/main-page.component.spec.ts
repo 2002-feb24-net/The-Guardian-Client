@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { SearchHospitalsComponent } from '../search-hospitals/search-hospitals.component';
 import { MainPageComponent } from './main-page.component';
 
 describe('MainPageComponent', () => {
@@ -8,7 +8,7 @@ describe('MainPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MainPageComponent ]
+      declarations: [ MainPageComponent, SearchHospitalsComponent ]
     })
     .compileComponents();
   }));
