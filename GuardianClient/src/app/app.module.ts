@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { MapApiComponent } from './map-api/map-api.component';
 import { SearchHospitalsComponent } from './search-hospitals/search-hospitals.component';
-import { AgmCoreModule } from '@agm/core';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,9 +17,7 @@ import { AgmCoreModule } from '@agm/core';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDYdN_gjtpNbNoV0dg6T3EZPbSn6XzQsPQ'
-    })
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

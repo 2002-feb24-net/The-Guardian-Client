@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AgmCoreModule } from '@agm/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {} from 'googlemaps';
 
 declare var ol: any;
 @Component({
@@ -8,26 +8,33 @@ declare var ol: any;
   styleUrls: ['./map-api.component.css']
 })
 export class MapApiComponent implements OnInit {
+  @ViewChild('map') gmapElement: any;
   latitude: number = 32.779;
   longitude: number = -96.808;
   map: any;
   isLoaded: boolean = false;
+  marker: google.maps.Marker;
+  location: string = "Dallas";
   constructor() { }
 
   ngOnInit(): void {
-    this.map = new ol.Map({
-      target: 'map',
-      layers: [
-        new ol.layer.Tile({
-          source: new ol.source.OSM()
-        })
-      ],
-      view: new ol.View({
-        center: ol.proj.fromLonLat([-96.808,32.779]),
-        zoom: 10
-      })
-    });
-    this.isLoaded = true;
+    //this.Geolocation();
+    this.Geolocation();
   }
-  
+  //Trying to get geolocation working
+  //It is not working currently
+  Geolocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => 
+      {
+        this.changeMap(position);
+      });
+    } else {
+      alert("Geolocation is not supported on your browser.");
+    }
+  }
+  changeMap(position) {
+    this.location = `${position.coords.latitude},${position.coords.longitude}`;
+    top.document.getElementById("maptest").setAttribute("src",`https://www.google.com/maps/embed/v1/search?key=AIzaSyBqPMgrXjT5aOT2gG1DN1QIzw1QqpEDL7E&q=hospitals&center=${this.location}&zoom=10`);
+  }
 }

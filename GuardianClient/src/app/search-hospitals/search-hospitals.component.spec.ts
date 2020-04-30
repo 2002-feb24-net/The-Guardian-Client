@@ -22,4 +22,9 @@ describe('SearchHospitalsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  //Tests to implement
+  //Test getting hospitals
+  //Test getting distances
+  //Test changing location
+  //Test error handlers
 });
