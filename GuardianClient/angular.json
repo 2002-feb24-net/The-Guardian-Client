@@ -120,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "GuardianClient"
+    }
+  },
+  "defaultProject": "GuardianClient",
+  "cli": {
+    "analytics": false
+  }
 }
