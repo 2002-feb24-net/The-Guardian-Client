@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchHospitalsComponent } from './search-hospitals.component';
-import { HttpErrorResponse, HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 describe('SearchHospitalsComponent', () => {
   let component: SearchHospitalsComponent;
   let fixture: ComponentFixture<SearchHospitalsComponent>;
