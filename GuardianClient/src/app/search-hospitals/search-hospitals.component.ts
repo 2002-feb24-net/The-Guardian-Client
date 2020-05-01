@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+/// <reference types="@types/googlemaps" />
+import { Component, ViewChild, EventEmitter, Output, OnInit, AfterViewInit, Input } from '@angular/core';
+import {} from "googlemaps";
 import { HospitalsService } from '../services/hospitals.service';
 import Hospitals from '../models/hospitals';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -12,6 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./search-hospitals.component.css']
 })
 export class SearchHospitalsComponent implements OnInit {
+
   hospitals: Hospitals[] = [];
   error: string | undefined;
   constructor(

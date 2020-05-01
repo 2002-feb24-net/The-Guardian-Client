@@ -22,4 +22,10 @@ describe('MapApiComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should geolocate', () => {
+    fixture = TestBed.createComponent(MapApiComponent);
+    component = fixture.componentInstance;
+    //component.Geolocation();
+    expect(location).toBeTruthy();
+  });
 });
