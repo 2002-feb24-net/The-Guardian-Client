@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+
+  web:
+    build: guardianclient
+    image: anvelez26/theguardianclient:v1.2
+    ports:
+      - 80:80
+    networks:
+      - default
+
+networks:
+  default:

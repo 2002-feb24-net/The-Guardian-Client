@@ -22,6 +22,9 @@
     "@angular/router": "~9.1.1",
     "@types/googlemaps": "^3.39.3",
     "httpclient": "^0.1.0",
+    "nan": "^2.14.1",
+    "node-gyp": "^6.1.0",
+    "node-mac-notifier": "^1.2.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
