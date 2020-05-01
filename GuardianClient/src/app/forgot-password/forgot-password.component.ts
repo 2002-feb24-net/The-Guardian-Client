@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-forgot-password',
@@ -7,6 +8,10 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./forgot-password.component.css']
 })
 export class ForgotPasswordComponent implements OnInit {
+
+  forgotPasswordForm = this.builder.group({
+    email: ['', Validators.required]
+  })
 
   constructor(
     private builder: FormBuilder,
@@ -16,7 +21,7 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   onSubmit() {
-    
+
   }
 
 }
