@@ -13,6 +13,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { CreateHospitalComponent } from './create-hospital/create-hospital.component';
 import { CreateReviewComponent } from './create-review/create-review.component';
 import { EditReviewComponent } from './edit-review/edit-review.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
 
@@ -30,7 +31,8 @@ import { EditReviewComponent } from './edit-review/edit-review.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
