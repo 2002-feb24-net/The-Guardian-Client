@@ -15,13 +15,12 @@ import { LogoutComponent } from './logout/logout.component';
 import { CreateHospitalComponent } from './create-hospital/create-hospital.component';
 import { CreateReviewComponent } from './create-review/create-review.component';
 import { EditReviewComponent } from './edit-review/edit-review.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
 
   declarations: [
     AppComponent,
-    Search-For-Hospital-Branch
     MainPageComponent,
     MapApiComponent,
     SearchHospitalsComponent,
@@ -39,7 +38,9 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormBuilder } from '@angular/forms';
 import { LogoutComponent } from './logout.component';
 
 describe('LogoutComponent', () => {
@@ -8,7 +8,8 @@ describe('LogoutComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LogoutComponent ]
+      declarations: [ LogoutComponent ],
+      providers: [ FormBuilder ]
     })
     .compileComponents();
   }));
