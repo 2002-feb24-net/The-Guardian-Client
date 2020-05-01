@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormBuilder } from '@angular/forms';
 import { ForgotPasswordComponent } from './forgot-password.component';
 
 describe('ForgotPasswordComponent', () => {
@@ -8,7 +8,8 @@ describe('ForgotPasswordComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ForgotPasswordComponent ]
+      declarations: [ ForgotPasswordComponent ],
+      providers: [FormBuilder]
     })
     .compileComponents();
   }));

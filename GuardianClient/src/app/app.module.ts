@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { MainPageComponent } from './main-page/main-page.component';
+import { MapApiComponent } from './map-api/map-api.component';
+import { SearchHospitalsComponent } from './search-hospitals/search-hospitals.component';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,12 +15,15 @@ import { LogoutComponent } from './logout/logout.component';
 import { CreateHospitalComponent } from './create-hospital/create-hospital.component';
 import { CreateReviewComponent } from './create-review/create-review.component';
 import { EditReviewComponent } from './edit-review/edit-review.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
 
   declarations: [
     AppComponent,
+    MainPageComponent,
+    MapApiComponent,
+    SearchHospitalsComponent,
     LoginComponent,
     ForgotPasswordComponent,
     CreateAccountComponent,
@@ -32,7 +37,10 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
