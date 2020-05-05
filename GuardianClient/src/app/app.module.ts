@@ -13,9 +13,10 @@ import { EditHospitalComponent } from './edit-hospital/edit-hospital.component';
 import { EditAccountComponent } from './edit-account/edit-account.component';
 import { LogoutComponent } from './logout/logout.component';
 import { CreateHospitalComponent } from './create-hospital/create-hospital.component';
-import { CreateReviewComponent } from './create-review/create-review.component';
+import { ViewReviewsComponent } from './view-reviews/view-reviews.component';
 import { EditReviewComponent } from './edit-review/edit-review.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateReviewComponent } from './create-review/create-review.component';
 
 @NgModule({
 
@@ -31,8 +32,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EditAccountComponent,
     LogoutComponent,
     CreateHospitalComponent,
-    CreateReviewComponent,
-    EditReviewComponent
+    ViewReviewsComponent,
+    EditReviewComponent,
+    CreateReviewComponent
   ],
   imports: [
     BrowserModule,
