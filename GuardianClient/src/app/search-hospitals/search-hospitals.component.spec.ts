@@ -38,7 +38,7 @@ describe('SearchHospitalsComponent', () => {
   it('should change locations', () => {
     fixture = TestBed.createComponent(SearchHospitalsComponent);
     component = fixture.componentInstance;
-    component.ChangeLocation();
+    component.ChangeLocation("Dallas");
     expect(component.hospitals).toBeTruthy();
   });
   //Tests to implement
