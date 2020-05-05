@@ -1,6 +1,8 @@
+<form (ngSubmit)="ChangeLocation(myInput.value)">
 <div style="text-align: center;" >
-    <input type="text" id="searchTextField" style="width: 75%; size: 100%;" placeholder="Search by Name, City, Zipcode, Address"> 
-</div> <br>
+    <input type="text" #myInput style="width: 75%; size: 100%;" placeholder="Search by Name, City, Zipcode, Address"> 
+</div> 
+</form> <br>
 <section class="container">
     <div class="flex-container" style="text-align: center; " >
         <article class="column">
@@ -40,14 +42,3 @@
         </article>
     </div>
 </section>
-<script>
-    var defaultBounds = new google.maps.LatLngBounds(
-new google.maps.LatLng(-33.8902, 151.1759),
-new google.maps.LatLng(-33.8474, 151.2631));
-
-var input = document.getElementById('searchTextField');
-
-var searchBox = new google.maps.places.SearchBox(input, {
-bounds: defaultBounds
-});
-</script>

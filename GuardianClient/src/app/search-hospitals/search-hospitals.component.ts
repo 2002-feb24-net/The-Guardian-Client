@@ -4,6 +4,7 @@ import {} from "googlemaps";
 import { HospitalsService } from '../services/hospitals.service';
 import Hospitals from '../models/hospitals';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ApiService } from '../services/api.service';
 /*
 **The Search Hospital Component is in charge of displaying the hospital list and parsing the users input to get
 **relative distance information so that the list of hospitals can be ordered by distance.
@@ -14,14 +15,16 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./search-hospitals.component.css']
 })
 export class SearchHospitalsComponent implements OnInit {
-
+  message:string;
   hospitals: Hospitals[] = [];
   error: string | undefined;
   constructor(
-    public hospitalApi: HospitalsService
+    public hospitalApi: HospitalsService,
+    public apiService: ApiService
   ) { }
 
   ngOnInit(): void {
+    this.apiService.currentMessage.subscribe(message => this.message = message);
     //this.GetHospitals()
   }
   //Features to implement:
@@ -48,9 +51,10 @@ export class SearchHospitalsComponent implements OnInit {
   }
   //Change location function
   //Searchbar should be able to tell the map api to change the origin point and update the map
-  ChangeLocation(){
-    //Needs implementation
-
+  ChangeLocation(userInput: string){
+    userInput = userInput.replace("%20","+");
+    console.log(userInput);
+    this.apiService.changeMessage(userInput);
     this.GetDistances();
   }
   handleError(error: HttpErrorResponse) {
