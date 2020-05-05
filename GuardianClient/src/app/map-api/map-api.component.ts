@@ -16,7 +16,7 @@ export class MapApiComponent implements OnInit {
   isLoaded: boolean = false;
   marker: google.maps.Marker;
   location: string = "Dallas";
-  message: string; //userinput
+  message: string = "Fort Worth"; //userinput
   constructor(public apiService: ApiService) { }
 
   ngOnInit(): void {
@@ -39,12 +39,16 @@ export class MapApiComponent implements OnInit {
       alert("Geolocation is not supported on your browser.");
     }
   }
-  changeMap(position) {
+  changeMap(position:any|null) {
     this.location = `${position.coords.latitude},${position.coords.longitude}`;
-    top.document.getElementById("maptest").setAttribute("src",`https://www.google.com/maps/embed/v1/search?key=AIzaSyBqPMgrXjT5aOT2gG1DN1QIzw1QqpEDL7E&q=hospitals&center=${this.location}&zoom=10`);
+    if(top.document.getElementById("maptest") != null){
+      top.document.getElementById("maptest").setAttribute("src",`https://www.google.com/maps/embed/v1/search?key=AIzaSyBqPMgrXjT5aOT2gG1DN1QIzw1QqpEDL7E&q=hospitals&center=${this.location}&zoom=10`);
+    }
   }
   changeLocation() {
     console.log(this.message);
-    top.document.getElementById("maptest").setAttribute("src",`https://www.google.com/maps/embed/v1/search?key=AIzaSyBqPMgrXjT5aOT2gG1DN1QIzw1QqpEDL7E&q=hospitals+near+${this.message}&zoom=10`);
+    if(top.document.getElementById("maptest") != null){
+      top.document.getElementById("maptest").setAttribute("src",`https://www.google.com/maps/embed/v1/search?key=AIzaSyBqPMgrXjT5aOT2gG1DN1QIzw1QqpEDL7E&q=hospitals+near+${this.message}&zoom=10`);
+    }
   }
 }
