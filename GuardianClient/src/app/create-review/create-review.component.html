@@ -1,1 +1,46 @@
-<p>create-review works!</p>
+<a *ngIf="view=='createReview'">
+    <h1 style=" font-size: 2em;">
+        <button class="myButton" type="button"
+            style="text-align: right; float: right;  font-size: 0.5em; text-decoration: none;" routerLink="logout"> Sign
+            Out </button>
+    </h1><br>
+    <h1 id="header" style="font-size: 3em; text-align: center;">
+        Leave a Review
+        <h2 id="hospitalName" style="font-size: 0.5em; text-align: center;">
+            {{this.hospitalSelected.Name}}
+        </h2>
+    </h1>
+    <form [formGroup]="createReviewsForm" (ngSubmit)="createReviews()" style="text-align: center;">
+        <label>
+            Medical Care Staff
+            <input type="text" formControlName="MedicalStaffRating" required>
+            <a style="left:5em; position: relative;">
+                Date Admittance:
+                <input type="datetime-local" formControlName="subscriptionName" required>
+            </a> <br>
+            <a style="right:0.75em; position: relative;">
+                Facilities
+                <input type="text" formControlName="FacilityRating" required>
+                <a style="left:5em; position: relative;">
+                    Reason ID:
+                    <input type="number" formControlName="ReasonId" required>
+                </a> <br>
+            </a>
+            <a style="right:9.5em; position: relative;">
+                Clerical Staff
+                <input type="text" formControlName="ClericalStaffRating" required> <br>
+            </a>
+            <a style="right:8.25em; position: relative;">
+                Overall
+                <input type="text" formControlName="OverallRating" required> <br>
+            </a> <br>
+            Comment:
+            <input type="text" formControlName="WrittenFeedback" style="height:5em; width: 20em; overflow: scroll;"required> <br> <br>
+            <button class="myButton" type="button" style="position:relative; right: 3em; " (click)="redirectToHome()"> Leave </button>
+            <button type="submit" [disabled]="!this.createReviewsForm.valid" class="myButton" style="position:relative; left: 3em; text-decoration: none;">
+                Submit Review
+            </button>
+        </label>
+        <br>
+    </form>
+</a>

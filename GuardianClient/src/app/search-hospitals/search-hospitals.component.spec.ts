@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
 import { SearchHospitalsComponent } from './search-hospitals.component';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 describe('SearchHospitalsComponent', () => {
@@ -8,6 +8,7 @@ describe('SearchHospitalsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ RouterTestingModule ],
       declarations: [ SearchHospitalsComponent ],
       providers: [HttpClient,HttpHandler]
     })

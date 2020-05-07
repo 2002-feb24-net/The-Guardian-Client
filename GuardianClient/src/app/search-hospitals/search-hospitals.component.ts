@@ -1,10 +1,11 @@
 /// <reference types="@types/googlemaps" />
-import { Component, ViewChild, EventEmitter, Output, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {} from "googlemaps";
 import { HospitalsService } from '../services/hospitals.service';
-import Hospitals from '../models/hospitals';
+import Hospital from '../models/hospital';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ApiService } from '../services/api.service';
+import { Router } from '@angular/router';
 /*
 **The Search Hospital Component is in charge of displaying the hospital list and parsing the users input to get
 **relative distance information so that the list of hospitals can be ordered by distance.
@@ -16,15 +17,106 @@ import { ApiService } from '../services/api.service';
 })
 export class SearchHospitalsComponent implements OnInit {
   message:string;
-  hospitals: Hospitals[] = [];
+  hospitals: Hospital[] = [];
+  hospitalSelection: Hospital;
   error: string | undefined;
+  view: string = "";
+  tempObject: string;
   constructor(
     public hospitalApi: HospitalsService,
-    public apiService: ApiService
+    public apiService: ApiService,
+    private router: Router
   ) { }
-
   ngOnInit(): void {
     this.apiService.currentMessage.subscribe(message => this.message = message);
+    this.hospitalApi.currentHospital.subscribe(hospital => this.hospitalSelection = hospital);
+    this.hospitalApi.currentView.subscribe(view => this.view = view);
+    //Making mock hospital data until api is established
+    this.hospitals = [{
+      id: 1,
+      Name: "Baylor Scott & White Heart and Vascular Hospital",
+      Address: "621 North Hall Street",
+      City: "Dallas",
+      State: "TX",
+      Zip: 75226,
+      Phone: "(214) 820-0600",
+      Website: "http://www.baylorhearthospital.com/handler.cfm?event=practice,main",
+      AggClericalStaffRating: 4,
+      AggFacilityRating: 3,
+      AggMedicalStaffRating: 2,
+      AggOverallRating: 3
+    },
+    {
+      id: 2,
+      Name: "Baylor Scott & White Medical Center Uptown",
+      Address: "2727 East Lemmon Ave.",
+      City: "Dallas",
+      State: "TX",
+      Zip: 75204,
+      Phone: "(214) 443-3000",
+      Website: "http://www.bmcuptown.com/",
+      AggClericalStaffRating: 2,
+      AggFacilityRating: 2,
+      AggMedicalStaffRating: 2,
+      AggOverallRating: 2
+    },
+    {
+      id: 3,
+      Name: "Baylor University Medical Center",
+      Address: "3500 Gaston Street",
+      City: "Dallas",
+      State: "TX",
+      Zip: 75246,
+      Phone: "(214) 820-0111",
+      Website: "http://www.bswhealth.com/locations/dallas/Pages/default.aspx",
+      AggClericalStaffRating: 4,
+      AggFacilityRating: 4,
+      AggMedicalStaffRating: 4,
+      AggOverallRating: 4
+    },
+    {
+      id: 4,
+      Name: "City Hospital at White Rock",
+      Address: "9440 Poppy Drive",
+      City: "Dallas",
+      State: "TX",
+      Zip: 75218,
+      Phone: " (214) 324-6100",
+      Website: "http://cityhospital.co/",
+      AggClericalStaffRating: 5,
+      AggFacilityRating: 5,
+      AggMedicalStaffRating: 5,
+      AggOverallRating: 5
+    },
+    {
+      id: 5,
+      Name: "Dallas Medical Center",
+      Address: "7 Medical Parkway ",
+      City: "Dallas",
+      State: "TX",
+      Zip: 75234,
+      Phone: "(972) 888-7000",
+      Website: "http://www.dallasmedcenter.com/",
+      AggClericalStaffRating: 1,
+      AggFacilityRating: 1,
+      AggMedicalStaffRating: 1,
+      AggOverallRating: 1
+    },
+    {
+      id: 6,
+      Name: "Dallas OverFlow Example",
+      Address: "7 Medical Parkway ",
+      City: "Dallas",
+      State: "TX",
+      Zip: 75234,
+      Phone: "(972) 888-7000",
+      Website: "http://www.dallasmedcenter.com/",
+      AggClericalStaffRating: 1,
+      AggFacilityRating: 1,
+      AggMedicalStaffRating: 1,
+      AggOverallRating: 1
+    },
+  ]
     //this.GetHospitals()
   }
   //Features to implement:
@@ -42,6 +134,12 @@ export class SearchHospitalsComponent implements OnInit {
       } 
     );
     this.GetDistances();
+  }
+  //Creating a redirection function that will redirect to the viewreviews component with
+  //the selected hospital
+  Redirect(hospitalSelection: Hospital){
+    this.hospitalApi.changeHospitalMessage(hospitalSelection,"view");
+    this.view="";
   }
   //Fetch distance between addresses using a distance matrix
   //Example: https://maps.googleapis.com/maps/api/distancematrix/outputFormat?parameters
