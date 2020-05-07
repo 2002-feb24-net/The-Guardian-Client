@@ -11,10 +11,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class CreateReviewComponent implements OnInit {
   view: string = "";
   hospitalSelected: Hospital;
-  constructor(
-    private hospitalApi: HospitalsService,
-    private formBuilder: FormBuilder
-    ) { }
   createReviewsForm = this.formBuilder.group({
     MedicalStaffRating: ['', Validators.required],
     ClericalStaffRating: ['', Validators.required],
@@ -25,6 +21,11 @@ export class CreateReviewComponent implements OnInit {
     DateAdmittance: ['', Validators.required],
     ReasonId: ['', Validators.required],
   });
+  
+  constructor(
+    private hospitalApi: HospitalsService,
+    private formBuilder: FormBuilder
+    ) { }
   ngOnInit(): void {
     this.hospitalApi.currentView.subscribe(view => {
       if(view=="createReview"){

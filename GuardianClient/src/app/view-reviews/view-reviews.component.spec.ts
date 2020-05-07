@@ -25,4 +25,12 @@ describe('CreateViewComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should redirect', () => {
+    //component.redirect(" ");
+    expect(component).toBeTruthy();
+  });
+  it('should initialize', () => {
+    component.ngOnInit();
+    expect(component).toBeTruthy();
+  });
 });
