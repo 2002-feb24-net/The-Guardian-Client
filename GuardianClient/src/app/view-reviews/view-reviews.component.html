@@ -1,17 +1,17 @@
 <a *ngIf="view=='view'">
-    <button type="button" style="text-align: left; float: left;" (click)="redirect()"> 
-        <a> Back </a> 
+    <button type="button" class="myButton" style="text-align: left; float: left;" (click)="redirect(' ')"> 
+         Back
     </button>
-    <button type="button" style="text-align: right; float: right;"> 
-        <a routerLink="logout"> Sign Out </a> 
+    <button type="button" class="myButton" style="text-align: right; float: right;" routerLink="logout"> 
+         Sign Out 
     </button>
     <!--
     <button type="button" style="text-align: right; float: right;"> 
         <a routerLink="edithospital"> Edit Hospital Information </a> 
     </button> 
     --> <!-- Add a ngif to check if they are an admin -->
-    <button type="button" style="text-align: right; float: right;"> 
-        <a routerLink="createreview"> Leave A Review </a> 
+    <button type="button" class="myButton" style="text-align: right; float: right;" (click)="redirect('createReview')"> 
+         Leave A Review 
     </button>
      <br> <br>
     <a style="position: absolute; left: 4em;" id="hospitalInfo">
@@ -47,3 +47,4 @@
         </div>
     </a>
 </a>
+<app-create-review></app-create-review>

@@ -12,14 +12,6 @@ import { Router } from '@angular/router';
 export class ViewReviewsComponent implements OnInit {
   reviewList: review[];
   hospital: hospital;
-  hospitalName: string = "";
-  location: string = "";
-  website: string = "";
-  phoneNumber: string = "";
-  medicalRating: number = 0;
-  facilityRating: number = 0;
-  clericalRating: number = 0;
-  overAllRating: number = 0;
   ratingsCount: number = 0;
   view: string = "";
   constructor(
@@ -31,14 +23,6 @@ export class ViewReviewsComponent implements OnInit {
     this.hospitalApi.currentHospital.subscribe(hospital => {
       //getting hospital observable from search hospital component
       this.hospital = hospital;
-      this.hospitalName = this.hospital.Name;
-      this.location = this.hospital.Address;
-      this.website = this.hospital.Website;
-      this.phoneNumber = this.hospital.Phone;
-      this.medicalRating = this.hospital.AggMedicalStaffRating;
-      this.facilityRating = this.hospital.AggFacilityRating;
-      this.clericalRating = this.hospital.AggClericalStaffRating;
-      this.overAllRating = Math.round(((this.medicalRating + this.facilityRating + this.clericalRating) / 3) * 100) / 100;
       this.ratingsCount = 5;
       this.reviewList = [{
         id: 1,
@@ -63,8 +47,15 @@ export class ViewReviewsComponent implements OnInit {
       }
     });
   }
-  redirect(){
-    location.reload();
+  redirect(path:string){
+    if(path=="")
+    {
+      location.reload();
+    }
+    else
+    {
+      this.hospitalApi.changeHospitalMessage(this.hospital,path);
+    }
   }
 
 }

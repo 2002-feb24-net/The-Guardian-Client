@@ -1,11 +1,10 @@
 /// <reference types="@types/googlemaps" />
-import { Component, ViewChild, EventEmitter, Output, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {} from "googlemaps";
 import { HospitalsService } from '../services/hospitals.service';
 import Hospital from '../models/hospital';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ApiService } from '../services/api.service';
-import { BehaviorSubject, from } from 'rxjs';
 import { Router } from '@angular/router';
 /*
 **The Search Hospital Component is in charge of displaying the hospital list and parsing the users input to get
@@ -92,6 +91,20 @@ export class SearchHospitalsComponent implements OnInit {
     {
       id: 5,
       Name: "Dallas Medical Center",
+      Address: "7 Medical Parkway ",
+      City: "Dallas",
+      State: "TX",
+      Zip: 75234,
+      Phone: "(972) 888-7000",
+      Website: "http://www.dallasmedcenter.com/",
+      AggClericalStaffRating: 1,
+      AggFacilityRating: 1,
+      AggMedicalStaffRating: 1,
+      AggOverallRating: 1
+    },
+    {
+      id: 6,
+      Name: "Dallas OverFlow Example",
       Address: "7 Medical Parkway ",
       City: "Dallas",
       State: "TX",
