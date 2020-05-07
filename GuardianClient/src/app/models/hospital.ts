@@ -1,5 +1,5 @@
 export default interface Hospital {
-    int: number;
+    id: number;
     Name: string;
     Address: string;
     City: string;

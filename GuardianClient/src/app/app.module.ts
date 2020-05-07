@@ -34,7 +34,7 @@ import { CreateReviewComponent } from './create-review/create-review.component';
     CreateHospitalComponent,
     ViewReviewsComponent,
     EditReviewComponent,
-    CreateReviewComponent
+    CreateReviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +44,7 @@ import { CreateReviewComponent } from './create-review/create-review.component';
     ReactiveFormsModule
 
   ],
+  exports: [],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,58 +1,49 @@
-<button type="button" style="text-align: left; float: left;"> 
-    <a routerLink=""> Back </a> 
-</button>
-<button type="button" style="text-align: right; float: right;"> 
-    <a routerLink="logout"> Sign Out </a> 
-</button>
-<!--
-<button type="button" style="text-align: right; float: right;"> 
-    <a routerLink="edithospital"> Edit Hospital Information </a> 
-</button> 
---> <!-- Add a ngif to check if they are an admin -->
-<button type="button" style="text-align: right; float: right;"> 
-    <a routerLink="createreview"> Leave A Review </a> 
-</button>
- <br> <br>
-<a style="position: absolute; left: 4em;" id="hospitalInfo">
-    <h1 style=" font-size: 2em;">
-        {{this.hospitalName}}
-    </h1>
-    <ol id="hospitalData" style="padding-left:1em; font-size: 1.2em;">
-        {{this.location}} <br>
-        {{this.phoneNumber}} <br>
-        <a href="{{this.website}}">{{this.website}}</a><br>
-    </ol>
-    <div style="padding-left:1em;">
-        <h1 style=" font-size: 1.75em;">
-            Ratings
-        </h1>
-        <ol id="ratingsinfo" style="font-size: 1.2em;">
-            Medical Care Staff: {{this.medicalRating}} <br>
-            Facilities: {{this.facilityRating}} <br>
-            Clerical Staff: {{this.clericalRating}} <br>
-            <b>Overall: {{this.overAllRating}} </b>
-        </ol> <!--Change to stars-->
+<a *ngIf="view=='view'">
+    <button type="button" style="text-align: left; float: left;" (click)="redirect()"> 
+        <a> Back </a> 
+    </button>
+    <button type="button" style="text-align: right; float: right;"> 
+        <a routerLink="logout"> Sign Out </a> 
+    </button>
+    <!--
+    <button type="button" style="text-align: right; float: right;"> 
+        <a routerLink="edithospital"> Edit Hospital Information </a> 
+    </button> 
+    --> <!-- Add a ngif to check if they are an admin -->
+    <button type="button" style="text-align: right; float: right;"> 
+        <a routerLink="createreview"> Leave A Review </a> 
+    </button>
+     <br> <br>
+    <a style="position: absolute; left: 4em;" id="hospitalInfo">
         <h1 style=" font-size: 2em;">
-            Reviews
+            {{this.hospital.Name}}
         </h1>
-        <a style=" border-style: solid; border-color: black; left: 6em; right: 6em; position:fixed; padding: 0.5em;">
-
-                <a id="reviewsInfo" style="font-size: 1.2em;">
-                    <a style = "left: 15em; position: absolute; bottom:3em; top:1em; right: 1em; border-style: solid; padding: 0.2em;">
-                        {{this.reviewList[0].WrittenFeedback}}
+        <ol id="hospitalData" style="padding-left:1em; font-size: 1.2em;">
+            {{this.hospital.Address}} <br>
+            {{this.hospital.Phone}} <br>
+            <a href="{{this.hospital.Website}}">{{this.hospital.Website}}</a><br>
+        </ol>
+        <div style="padding-left:1em;">
+            <h1 style=" font-size: 1.75em;">
+                Ratings
+            </h1>
+            <ol id="ratingsinfo" style="font-size: 1.2em;">
+                Medical Care Staff: {{this.hospital.AggMedicalStaffRating}} <br>
+                Facilities: {{this.hospital.AggFacilityRating}} <br>
+                Clerical Staff: {{this.hospital.AggClericalStaffRating}} <br>
+                <b>Overall: {{this.hospital.AggOverallRating}} </b>
+            </ol> <!--Change to stars-->
+            <h1 style=" font-size: 2em;">
+                Reviews
+            </h1>
+            <a style=" border-style: solid; border-color: black; left: 6em; right: 6em; position:fixed; padding: 0.5em;">
+    
+    
+                    <br>
+                    <a style=" border-style: solid; border-top:1em; border-color: black; left: 6em; right: 6em; position:fixed; padding: 0.5em; text-align: center;">
+                       <br> See All Reviews
                     </a>
-                    Medical Care Staff: {{this.reviewList[0].MedicalStaffRating}} <br>
-                    Facilities: {{this.reviewList[0].FacilityRating}} <br>
-                    Clerical Staff: {{this.reviewList[0].ClericalStaffRating}} <br>
-                    <b>Overall: {{this.reviewList[0].OverallRating}} </b> <br>
-                    <a style="position: absolute; left: 15em;">Name</a>
-                    <a style="position: absolute; left: 20em;">{{this.reviewList[0].DateAdmittance}}</a><br>
-                    <a style="position: absolute; left: 17em;">Reason for Admittance ID: {{this.reviewList[0].ReasonId}}</a>
-                </a> <!--Change to stars-->
-                <br>
-                <a style=" border-style: solid; border-top:1em; border-color: black; left: 6em; right: 6em; position:fixed; padding: 0.5em; text-align: center;">
-                   <br> See All Reviews
-                </a>
-        </a>
-    </div>
+            </a>
+        </div>
+    </a>
 </a>

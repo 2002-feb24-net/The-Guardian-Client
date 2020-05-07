@@ -1,74 +1,57 @@
-<form (ngSubmit)="ChangeLocation(myInput.value)">
-    <div style="text-align: center;">
-        <input type="text" #myInput style="width: 75%; size: 100%;"
-            placeholder="Search by Name, City, Zipcode, Address">
-    </div> <br>
-    <div id="filters" style="left: 8em; position: relative; font-size: larger;">
-        
-        <a style="position: relative; left: 2em;">
-            <label for="location">Filter Location:</label>
-            <select id="location">
-                <option value="all">All</option>
-                <option value="100">>100 Miles</option>
-                <option value="50">>50 Miles</option>
-                <option value="25">>25 Miles</option>
-                <option value="10">>10 Miles</option>
-            </select>
-        </a>
-        <a style="position: relative; left: 3em;" id="divrating">
-            <label for="rating">Filter Rating:</label>
-            <select id="rating">
-                <option value="all">All</option>
-                <option value="4stars">>4 Stars</option>
-                <option value="3stars">>3 Stars</option>
-                <option value="2stars">>2 Stars</option>
-            </select>
-        </a>
-        <a style="position: relative; left: 4em;" id="divorder">
-            <label for="order">Order by:</label>
-            <select id="rating">
-                <option value="location">Location</option>
-                <option value="rating">Rating</option>
-            </select>
-        </a>
-    </div>
-</form> <br>
-<section class="container">
-    <div class="flex-container" style="text-align: center; ">
-        <article class="column">
-            <div class="left-half" style="overflow-y:scroll;  text-align: left; ">
-                <!--This list will be changed to a ngfor hospitals loop once the api is complete -->
-                <ol>
-                    <a>Hospital Name: </a> <br>
-                    <a>Address: </a> <br>
-                    <a>Distance: </a> <!--  -->
-                </ol>
-                <ol>
-                    <a>Hospital Name: </a> <br>
-                    <a>Address: </a> <br>
-                    <a>Distance: </a> <br>
-                </ol>
-                <ol>
-                    <a>Hospital Name: </a> <br>
-                    <a>Address: </a> <br>
-                    <a>Distance: </a> <br>
-                </ol>
-                <ol>
-                    <a>Hospital Name: </a> <br>
-                    <a>Address: </a> <br>
-                    <a>Distance: </a> <br>
-                </ol>
-                <ol>
-                    <a>Hospital Name: </a> <br>
-                    <a>Address: </a> <br>
-                    <a>Distance: </a> <br>
-                </ol>
-            </div>
-        </article>
-        <article class="column">
-            <div class="right-half">
-                <app-map-api></app-map-api>
-            </div>
-        </article>
-    </div>
-</section>
+<a *ngIf="view=='main'">
+    <form (ngSubmit)="ChangeLocation(myInput.value)">
+        <div style="text-align: center;">
+            <input type="text" #myInput style="width: 75%; size: 100%;"
+                placeholder="Search by Name, City, Zipcode, Address">
+        </div> <br>
+        <div id="filters" style="left: 8em; position: relative; font-size: larger;">
+            
+            <a style="position: relative; left: 2em;">
+                <label for="location">Filter Location:</label>
+                <select id="location">
+                    <option value="all">All</option>
+                    <option value="100">>100 Miles</option>
+                    <option value="50">>50 Miles</option>
+                    <option value="25">>25 Miles</option>
+                    <option value="10">>10 Miles</option>
+                </select>
+            </a>
+            <a style="position: relative; left: 3em;" id="divrating">
+                <label for="rating">Filter Rating:</label>
+                <select id="rating">
+                    <option value="all">All</option>
+                    <option value="4stars">>4 Stars</option>
+                    <option value="3stars">>3 Stars</option>
+                    <option value="2stars">>2 Stars</option>
+                </select>
+            </a>
+            <a style="position: relative; left: 4em;" id="divorder">
+                <label for="order">Order by:</label>
+                <select id="rating">
+                    <option value="location">Location</option>
+                    <option value="rating">Rating</option>
+                </select>
+            </a>
+        </div>
+    </form> <br>
+    <section class="container">
+        <div class="flex-container" style="text-align: center; ">
+            <article class="column">
+                <div class="left-half" style="overflow-y:scroll;  text-align: left; ">
+                    <!--This list will be changed to a ngfor hospitals loop once the api is complete -->
+                    <ol *ngFor="let hospitalList of hospitals" (click)="Redirect(this.hospitalList)">
+                        <a>Hospital Name: {{this.hospitalList.Name}}</a> <br>
+                        <a>Address: {{this.hospitalList.Address}}</a> <br>
+                        <a>Distance: N/A</a> <!--  -->
+                    </ol>
+                </div>
+            </article>
+            <article class="column">
+                <div class="right-half">
+                    <app-map-api></app-map-api>
+                </div>
+            </article>
+        </div>
+    </section>
+</a>
+<app-view-reviews></app-view-reviews>
