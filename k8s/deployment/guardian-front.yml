@@ -19,6 +19,6 @@ spec:
     spec:
       containers:
       - name: guardian-front
-        image: anvelez26/theguardianclient:1.2
+        image: anvelez26/theguardianclient:v1.2
         ports:
         - containerPort: 80
