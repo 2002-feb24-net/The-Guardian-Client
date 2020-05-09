@@ -127,6 +127,7 @@ stages:
           steps:
 
           - task: KubernetesManifest@0
+            displayName: kubectl apply
             inputs:
               action: 'deploy'
               kubernetesServiceConnection: 'dev-default-1588997449589'
