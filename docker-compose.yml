@@ -3,7 +3,7 @@ version: '3.7'
 services:
 
   web:
-    build: guardianclient
+    build: GuardianClient
     image: theguardianclient:v1.2
     ports:
       - 4200:80
