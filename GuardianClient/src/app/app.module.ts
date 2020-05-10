@@ -18,6 +18,8 @@ import { EditReviewComponent } from './edit-review/edit-review.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateReviewComponent } from './create-review/create-review.component';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
 
   declarations: [
@@ -41,11 +43,12 @@ import { CreateReviewComponent } from './create-review/create-review.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
 
+    NgbModule
   ],
   exports: [],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

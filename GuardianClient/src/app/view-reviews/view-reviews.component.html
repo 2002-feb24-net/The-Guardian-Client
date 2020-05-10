@@ -1,3 +1,4 @@
+
 <a *ngIf="view=='view'">
     <button type="button" class="myButton" style="text-align: left; float: left;" (click)="redirect(' ')"> 
          Back
@@ -28,10 +29,10 @@
                 Ratings
             </h1>
             <ol id="ratingsinfo" style="font-size: 1.2em;">
-                Medical Care Staff: {{this.hospital.AggMedicalStaffRating}} <br>
-                Facilities: {{this.hospital.AggFacilityRating}} <br>
-                Clerical Staff: {{this.hospital.AggClericalStaffRating}} <br>
-                <strong>Overall: {{this.hospital.AggOverallRating}} </strong>
+                Medical Care Staff:   <ngb-rating [(rate)]="this.hospital.AggMedicalStaffRating" [readonly]="true" [max]="5" ></ngb-rating> <br>
+                Facilities: <ngb-rating [(rate)]="this.hospital.AggFacilityRating" [readonly]="true" [max]="5" ></ngb-rating> <br>
+                Clerical Staff: <ngb-rating [(rate)]="this.hospital.AggClericalStaffRating" [readonly]="true" [max]="5" ></ngb-rating> <br>
+                <strong>Overall: <ngb-rating [(rate)]="this.hospital.AggOverallRating" [readonly]="true" [max]="5" ></ngb-rating></strong>
             </ol> <!--Change to stars-->
             <h1 style=" font-size: 2em;">
                 Reviews
@@ -47,4 +48,5 @@
         </div>
     </a>
 </a>
+
 <app-create-review></app-create-review>

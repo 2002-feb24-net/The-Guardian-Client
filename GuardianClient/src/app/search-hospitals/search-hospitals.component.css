@@ -21,7 +21,7 @@ ol {
   margin: 0;
 }
 .flex-container{
-  width: 80%;
+  width: 100%;
   min-height: 300px;
   margin: 0 auto;
   display: -webkit-flex; /* Safari */     
