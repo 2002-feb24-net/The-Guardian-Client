@@ -13,14 +13,14 @@
     <form [formGroup]="createReviewsForm" (ngSubmit)="createReviews()" style="text-align: center;">
         <label>
             Medical Care Staff
-            <input type="text" formControlName="MedicalStaffRating" required>
+            <ngb-rating [(rate)]="MedicalStaffRating" [max]="5"></ngb-rating> 
             <a style="left:5em; position: relative;">
                 Date Admittance:
                 <input type="datetime-local" formControlName="subscriptionName" required>
             </a> <br>
             <a style="right:0.75em; position: relative;">
                 Facilities
-                <input type="text" formControlName="FacilityRating" required>
+                <ngb-rating [(rate)]="FacilityRating" [max]="5"></ngb-rating> 
                 <a style="left:5em; position: relative;">
                     Reason ID:
                     <input type="number" formControlName="ReasonId" required>
@@ -28,11 +28,11 @@
             </a>
             <a style="right:9.5em; position: relative;">
                 Clerical Staff
-                <input type="text" formControlName="ClericalStaffRating" required> <br>
+                <ngb-rating [(rate)]="ClericalStaffRating" [max]="5"></ngb-rating> <br>
             </a>
             <a style="right:8.25em; position: relative;">
                 Overall
-                <input type="text" formControlName="OverallRating" required> <br>
+                <ngb-rating [(rate)]="OverallRating" [max]="5"></ngb-rating> <br>
             </a> <br>
             Comment:
             <input type="text" formControlName="WrittenFeedback" style="height:5em; width: 20em; overflow: scroll;"required> <br> <br>

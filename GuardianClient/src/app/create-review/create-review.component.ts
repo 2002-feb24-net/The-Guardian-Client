@@ -11,11 +11,12 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class CreateReviewComponent implements OnInit {
   view: string = "";
   hospitalSelected: Hospital;
+  MedicalStaffRating: number;
+  ClericalStaffRating: number;
+  FacilityRating: number;
+  OverallRating: number;
+
   createReviewsForm = this.formBuilder.group({
-    MedicalStaffRating: ['', Validators.required],
-    ClericalStaffRating: ['', Validators.required],
-    FacilityRating: ['', Validators.required],
-    OverallRating: ['', Validators.required],
     WrittenFeedback: ['', Validators.required],
     DateSubmitted: ['', Validators.required],
     DateAdmittance: ['', Validators.required],
