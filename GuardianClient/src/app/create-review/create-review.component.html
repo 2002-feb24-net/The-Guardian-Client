@@ -10,37 +10,45 @@
             {{this.hospitalSelected.name}}
         </h2>
     </h1>
-    <form [formGroup]="createReviewsForm" (ngSubmit)="createReviews()" style="text-align: center;">
-        <label>
-            Medical Care Staff
-            <ngb-rating [(rate)]="MedicalStaffRating" [rate]="1" [max]="5"></ngb-rating> 
-            <a style="left:5em; position: relative;">
-                Date Admittance:
-                <input type="datetime-local" formControlName="DateAdmittance" required>
-            </a> <br>
-            <a style="right:0.75em; position: relative;">
-                Facilities
-                <ngb-rating [(rate)]="FacilityRating" [rate]="1" [max]="5"></ngb-rating> 
+    <a *ngIf="submitted==false">
+        <form [formGroup]="createReviewsForm" (ngSubmit)="createReviews()" style="text-align: center;">
+            <label>
+                Medical Care Staff
+                <ngb-rating [(rate)]="MedicalStaffRating" [rate]="1" [max]="5"></ngb-rating> 
                 <a style="left:5em; position: relative;">
-                    Reason:
-                    <input type="text" formControlName="Reason" placeholder="Consultation, Surgery, Post Surgery, Emergency, Other" required>
+                    Date Admittance:
+                    <input type="datetime-local" formControlName="DateAdmittance" required>
                 </a> <br>
-            </a>
-            <a style="right:9.5em; position: relative;">
-                Clerical Staff
-                <ngb-rating [(rate)]="ClericalStaffRating" [rate]="1" [max]="5"></ngb-rating> <br>
-            </a>
-            <a style="right:8.25em; position: relative;">
-                Overall
-                <ngb-rating [rate]="(FacilityRating+MedicalStaffRating+ClericalStaffRating)/3" [max]="5" [readonly]="true"></ngb-rating> <br>
-            </a> <br>
-            Comment:
-            <input type="text" formControlName="WrittenFeedback" style="height:5em; width: 20em; overflow: scroll;"required> <br> <br>
-            <button class="myButton" type="button" style="position:relative; right: 3em; " (click)="redirectToHome()"> Leave </button>
-            <button type="submit" [disabled]="!this.createReviewsForm.valid" class="myButton" style="position:relative; left: 3em; text-decoration: none;">
-                Submit Review
-            </button>
-        </label>
+                <a style="right:0.75em; position: relative;">
+                    Facilities
+                    <ngb-rating [(rate)]="FacilityRating" [rate]="1" [max]="5"></ngb-rating> 
+                    <a style="left:5em; position: relative;">
+                        Reason:
+                        <input type="text" formControlName="Reason" placeholder="Consultation, Surgery, Post Surgery, Emergency, Other" required>
+                    </a> <br>
+                </a>
+                <a style="right:9.5em; position: relative;">
+                    Clerical Staff
+                    <ngb-rating [(rate)]="ClericalStaffRating" [rate]="1" [max]="5"></ngb-rating> <br>
+                </a>
+                <a style="right:8.25em; position: relative;">
+                    Overall
+                    <ngb-rating [rate]="(FacilityRating+MedicalStaffRating+ClericalStaffRating)/3" [max]="5" [readonly]="true"></ngb-rating> <br>
+                </a> <br>
+                Comment:
+                <input type="text" formControlName="WrittenFeedback" style="height:5em; width: 20em; overflow: scroll;"required> <br> <br>
+                <button class="myButton" type="button" style="position:relative; right: 3em; " (click)="redirectToHome()"> Leave </button>
+                <button type="submit" [disabled]="!this.createReviewsForm.valid" class="myButton" style="position:relative; left: 3em; text-decoration: none;">
+                    Submit Review
+                </button>
+            </label>
+            <br>
+        </form>
+    </a>
+    <a *ngIf="submitted==true">
         <br>
-    </form>
+        <h1 style=" text-align: center;">
+            Review Submitted!
+        </h1>
+    </a>
 </a>

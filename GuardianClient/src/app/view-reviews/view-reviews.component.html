@@ -76,7 +76,7 @@
                         </a>
                     </div>
                 </a>
-                <a *ngIf="hospital.reviews[0]==null" style="text-align: center; left: 22.5em;  position: relative;">
+                <a *ngIf="hospital.reviews[0]==null" style="text-align: center; left: 35%;  position: relative; float:left;">
                     No Reviews Found
                 </a>
                 <a *ngIf="this.showReviews==true">
@@ -118,7 +118,7 @@
                     </a>
                     
                 </a> 
-                <a *ngIf="showReviews==false" style=" border-style: solid;  top:37em; left: 6em; right: 25%; height:3em; border-color: black;  position:fixed; padding: 1em; text-align: center;">
+                <a *ngIf="showReviews==false&&hospital.reviews[0]!=null" style=" border-style: solid;  top:37em; left: 6em; right: 25%; height:3em; border-color: black;  position:fixed; padding: 1em; text-align: center;">
                 <a (click)="ShowAll('successful')">
                     See All Reviews
                 </a>

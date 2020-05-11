@@ -19,6 +19,7 @@ export class CreateReviewComponent implements OnInit {
   FacilityRating: number;
   OverallRating: number;
   error: string | undefined;
+  submitted: boolean = false;
   createReviewsForm = this.formBuilder.group({
     WrittenFeedback: ['', Validators.required],
     DateAdmittance: ['', Validators.required],
@@ -64,6 +65,7 @@ export class CreateReviewComponent implements OnInit {
             console.log("error"+this.error);
           } else {
             this.resetError(); //clears error message
+            this.submitted=true;
           }
         },
         error => this.handleError(error) //handles error message
