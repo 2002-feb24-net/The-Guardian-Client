@@ -1,7 +1,6 @@
-import User from './user';
-import Hospital from './hospital';
+
 export default interface Review {
-    id: number;
+    id?: number;
     userId: number;
     hospitalId: number;
     medicalStaffRating: number;
@@ -12,6 +11,4 @@ export default interface Review {
     dateSubmitted: Date;
     dateAdmittance: Date;
     reason: string;
-    user?: User;
-    hospital?: Hospital;
 }
