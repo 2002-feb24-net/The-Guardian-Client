@@ -16,10 +16,6 @@ describe('HospitalsService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-  it('should get distances', () => {
-    service.GetDistances();
-    expect(service).toBeTruthy();
-  });
   it('should get hospitals', () => {
     service.GetHospitals();
     expect(service).toBeTruthy();

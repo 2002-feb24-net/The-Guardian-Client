@@ -22,7 +22,7 @@ export class SearchHospitalsComponent implements OnInit {
   message:string;
   hospitals: Hospital[] = [];
   hospitalSelection: Hospital;
-  location: string;
+  location: string = "";
   geoCodedAddress: string = "";
   distanceInfo: any;
   error: string | undefined;
@@ -120,7 +120,7 @@ export class SearchHospitalsComponent implements OnInit {
         destinations: arrayStrings,
         travelMode: google.maps.TravelMode.DRIVING,
         unitSystem: google.maps.UnitSystem.IMPERIAL
-      }, this.Callback
+      }, this.Callback //this callback function causes a lot of issues with scope
     );
   }
   Callback(response, status) {
