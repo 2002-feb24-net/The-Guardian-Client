@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class ViewReviewsComponent implements OnInit {
   reviewList: review[];
   hospital: hospital;
+  showReviews=false;
   ratingsCount: number = 0;
   view: string = "";
   constructor(
@@ -58,5 +59,8 @@ export class ViewReviewsComponent implements OnInit {
       this.hospitalApi.changeHospitalMessage(this.hospital,path);
     }
   }
-
+  ShowAll(param:string){
+    console.log(param);
+    this.showReviews=true;
+  }
 }
