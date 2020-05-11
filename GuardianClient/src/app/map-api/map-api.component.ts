@@ -21,10 +21,12 @@ export class MapApiComponent implements OnInit {
 
   ngOnInit(): void {
     //this.Geolocation();
-    this.apiService.currentMessage.subscribe(message => {
-      this.message = message;
-      this.changeLocation();
-    });
+    //subscribe to the service message
+    this.apiService.currentLocation.subscribe(location => 
+      {
+        this.location = location;
+      });
+    this.apiService.changeLocation(this.location);
     this.Geolocation();
   }
   //Trying to get geolocation working
@@ -41,6 +43,7 @@ export class MapApiComponent implements OnInit {
   }
   changeMap(position:any|null) {
     this.location = `${position.coords.latitude},${position.coords.longitude}`;
+    this.apiService.changeLocation(this.location);
     if(top.document.getElementById("maptest") != null){
       top.document.getElementById("maptest").setAttribute("src",`https://www.google.com/maps/embed/v1/search?key=AIzaSyBqPMgrXjT5aOT2gG1DN1QIzw1QqpEDL7E&q=hospitals&center=${this.location}&zoom=10`);
     }

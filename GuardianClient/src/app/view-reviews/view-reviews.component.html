@@ -1,49 +1,128 @@
-
 <a *ngIf="view=='view'">
-    <button type="button" class="myButton" style="text-align: left; float: left;" (click)="redirect(' ')"> 
-         Back
+    <button type="button" class="myButton" style="text-align: left; float: left;" (click)="redirect(' ')">
+        Back
     </button>
-    <button type="button" class="myButton" style="text-align: right; float: right;" routerLink="logout"> 
-         Sign Out 
+    <button type="button" class="myButton" style="text-align: right; float: right;" routerLink="logout">
+        Sign Out
     </button>
     <!--
     <button type="button" style="text-align: right; float: right;"> 
         <a routerLink="edithospital"> Edit Hospital Information </a> 
     </button> 
-    --> <!-- Add a ngif to check if they are an admin -->
-    <button type="button" class="myButton" style="text-align: right; float: right;" (click)="redirect('createReview')"> 
-         Leave A Review 
+    -->
+    <!-- Add a ngif to check if they are an admin -->
+    <button type="button" class="myButton" style="text-align: right; float: right;" (click)="redirect('createReview')">
+        Leave A Review
     </button>
-     <br> <br>
+    <br> <br>
     <a style="position: absolute; left: 4em;" id="hospitalInfo">
         <h1 style=" font-size: 2em;">
-            {{this.hospital.Name}}
+            {{this.hospital.name}}
         </h1>
         <ol id="hospitalData" style="padding-left:1em; font-size: 1.2em;">
-            {{this.hospital.Address}} <br>
-            {{this.hospital.Phone}} <br>
-            <a href="{{this.hospital.Website}}">{{this.hospital.Website}}</a><br>
+            {{this.hospital.address}} <br>
+            {{this.hospital.phone}} <br>
+            <a href="{{this.hospital.website}}">{{this.hospital.website}}</a><br>
         </ol>
         <div style="padding-left:1em;">
             <h1 style=" font-size: 1.75em;">
                 Ratings
             </h1>
             <ol id="ratingsinfo" style="font-size: 1.2em;">
-                Medical Care Staff:   <ngb-rating [(rate)]="this.hospital.AggMedicalStaffRating" [readonly]="true" [max]="5" ></ngb-rating> <br>
-                Facilities: <ngb-rating [(rate)]="this.hospital.AggFacilityRating" [readonly]="true" [max]="5" ></ngb-rating> <br>
-                Clerical Staff: <ngb-rating [(rate)]="this.hospital.AggClericalStaffRating" [readonly]="true" [max]="5" ></ngb-rating> <br>
-                <strong>Overall: <ngb-rating [(rate)]="this.hospital.AggOverallRating" [readonly]="true" [max]="5" ></ngb-rating></strong>
-            </ol> <!--Change to stars-->
+                Medical Care Staff: <ngb-rating [(rate)]="this.hospital.aggMedicalStaffRating" [readonly]="true"
+                    [max]="5"></ngb-rating> <br>
+                Facilities: <ngb-rating [(rate)]="this.hospital.aggFacilityRating" [readonly]="true" [max]="5">
+                </ngb-rating> <br>
+                Clerical Staff: <ngb-rating [(rate)]="this.hospital.aggClericalStaffRating" [readonly]="true" [max]="5">
+                </ngb-rating> <br>
+                <strong>Overall: <ngb-rating [(rate)]="this.hospital.aggOverallRating" [readonly]="true" [max]="5">
+                    </ngb-rating></strong>
+            </ol>
             <h1 style=" font-size: 2em;">
                 Reviews
             </h1>
-            <a style=" border-style: solid; border-color: black; left: 6em; right: 6em; position:fixed; padding: 0.5em;">
-    
-    
-                    <br>
-                    <a style=" border-style: solid; border-top:1em; border-color: black; left: 6em; right: 6em; position:fixed; padding: 0.5em; text-align: center;">
-                       <br> See All Reviews
+            <a
+                style=" border-style: solid; border-color: black; left: 6em; right: 25%; position:fixed; padding: 0.5em;">
+                <a *ngIf="hospital.reviews[0]!=null&&this.showReviews==false">
+                    <a style="position: fixed; float:left;">
+                        Medical Care Staff: <ngb-rating [(rate)]="this.hospital.reviews[0].medicalStaffRating"
+                        [readonly]="true" [max]="5"></ngb-rating>
                     </a>
+                     <br>
+                    <a style="position: relative; top:-2em; left:25em; float:left;">
+                        Review:
+                    </a>
+                    <a style="float:left;">Facilities: <ngb-rating [(rate)]="this.hospital.reviews[0].facilityRating"
+                            [readonly]="true" [max]="5"></ngb-rating> </a>
+                    <a style=" position: relative; float: left; right: 25%; left: 10em; width:50%; height: 5em; border-style: solid; border-color: black; padding: 0.5em; overflow-y: scroll; overflow-wrap: break-word;">
+                            {{this.hospital.reviews[0].writtenFeedback}}
+                    </a><br>
+                    <a style="float:left; position: fixed; left:10em;">
+                        <a>
+                            Clerical Staff: <ngb-rating [(rate)]="this.hospital.reviews[0].clericalStaffRating"
+                            [readonly]="true" [max]="5"></ngb-rating> <br>
+                        </a> 
+                    </a><br>
+                    <a style="float:left; position: fixed; left:10em; ">
+                        <strong>Overall: <ngb-rating [(rate)]="this.hospital.reviews[0].overallRating" [readonly]="true"
+                            [max]="5"></ngb-rating></strong>
+                    </a><br> <br>
+                    <div style="position: relative; float: left; left: 22.5em;   top: 0em;">
+                        User ID: {{this.hospital.reviews[0].userId}}
+                        <a style="position: relative; left: 7em; overflow:visible;"> Date:
+                            {{this.hospital.reviews[0].dateAdmittance.toString().substring(0,10)}} <br></a>
+                        <a style="position: relative; left: 1em;">
+                            Reason for Admittance: {{this.hospital.reviews[0].reason}}
+                        </a>
+                    </div>
+                </a>
+                <a *ngIf="hospital.reviews[0]==null" style="text-align: center; left: 35%;  position: relative; float:left;">
+                    No Reviews Found
+                </a>
+                <a *ngIf="this.showReviews==true">
+                    <a *ngFor="let reviewList of hospital.reviews">
+                        <a style="position:relative;">
+                            <a style="position: relative; float:left;">
+                                Medical Care Staff: <ngb-rating [(rate)]="reviewList.medicalStaffRating"
+                                [readonly]="true" [max]="5"></ngb-rating>
+                            </a>
+                             <br>
+                            <a style="position: relative; top:-2em; left:25em; float:left;">
+                                Review:
+                            </a>
+                            <a style="float:left;">Facilities: <ngb-rating [(rate)]="reviewList.facilityRating"
+                                    [readonly]="true" [max]="5"></ngb-rating> </a>
+                            <a style=" position: relative; float: left; right: 25%; left: 10em; width:50%; height: 5em; border-style: solid; border-color: black; padding: 0.5em; overflow-y: scroll; overflow-wrap: break-word;">
+                                    {{reviewList.writtenFeedback}}
+                            </a><br>
+                            <a style="float:left; position: fixed; left:10em;">
+                                <a>
+                                    Clerical Staff: <ngb-rating [(rate)]="reviewList.clericalStaffRating"
+                                    [readonly]="true" [max]="5"></ngb-rating> <br>
+                                </a> 
+                            </a><br>
+                            <a style="float:left; position: fixed; left:10em; ">
+                                <strong>Overall: <ngb-rating [(rate)]="reviewList.overallRating" [readonly]="true"
+                                    [max]="5"></ngb-rating></strong>
+                            </a><br> <br>
+                            <div style="position: relative; float: left; left: 22.5em;   top: 0em;">
+                                User ID: {{reviewList.userId}}
+                                <a style="position: relative; left: 7em; overflow:visible;"> Date:
+                                    {{reviewList.dateAdmittance.toString().substring(0,10)}} <br></a>
+                                <a style="position: relative; left: 1em;">
+                                    Reason for Admittance: {{reviewList.reason}}
+                                </a>
+                            </div>
+                        </a> <br> <br> <br> <br>
+                        
+                    </a>
+                    
+                </a> 
+                <a *ngIf="showReviews==false&&hospital.reviews[0]!=null" style=" border-style: solid;  top:37em; left: 6em; right: 25%; height:3em; border-color: black;  position:fixed; padding: 1em; text-align: center;">
+                <a (click)="ShowAll('successful')">
+                    See All Reviews
+                </a>
+            </a>
             </a>
         </div>
     </a>

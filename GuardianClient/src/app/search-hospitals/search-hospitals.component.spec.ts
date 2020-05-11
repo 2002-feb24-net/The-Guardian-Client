@@ -36,6 +36,12 @@ describe('SearchHospitalsComponent', () => {
     component.GetDistances();
     expect(component.hospitals).toBeTruthy();
   });
+  it('should callback', () => {
+    fixture = TestBed.createComponent(SearchHospitalsComponent);
+    component = fixture.componentInstance;
+    component.Callback(null,null);
+    expect(component.hospitals).toBeTruthy();
+  });
   it('should change locations', () => {
     fixture = TestBed.createComponent(SearchHospitalsComponent);
     component = fixture.componentInstance;
