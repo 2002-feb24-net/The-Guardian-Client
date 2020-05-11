@@ -4,6 +4,7 @@ import hospital from '../models/hospital'
 import { HospitalsService } from '../services/hospitals.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-view-reviews',
   templateUrl: './view-reviews.component.html',
@@ -48,7 +49,7 @@ export class ViewReviewsComponent implements OnInit {
     });
   }
   redirect(path:string){
-    if(path=="")
+    if(path==" ")
     {
       location.reload();
     }
