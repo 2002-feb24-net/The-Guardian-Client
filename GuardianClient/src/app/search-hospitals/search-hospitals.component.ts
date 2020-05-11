@@ -6,6 +6,9 @@ import Hospital from '../models/hospital';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ApiService } from '../services/api.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import Distance from '../models/distance';
+declare var require: any
 /*
 **The Search Hospital Component is in charge of displaying the hospital list and parsing the users input to get
 **relative distance information so that the list of hospitals can be ordered by distance.
@@ -19,14 +22,24 @@ export class SearchHospitalsComponent implements OnInit {
   message:string;
   hospitals: Hospital[] = [];
   hospitalSelection: Hospital;
+  location: string;
+  geoCodedAddress: string = "";
+  distanceInfo: any;
   error: string | undefined;
   view: string = "";
   tempObject: string;
+  parameters:string;
+  results:  any[];
+  origins: string[] = ['San Francisco CA'];
+  destinations: string[] = ['New York NY', '41.8337329,-87.7321554'];
   constructor(
     public hospitalApi: HospitalsService,
     public apiService: ApiService,
-    private router: Router
-  ) { }
+    private router: Router,
+  ) {
+    this.Callback = this.Callback.bind(this);
+    this.GetDistances = this.GetDistances.bind(this);
+   }
   ngOnInit(): void {
     this.apiService.currentMessage.subscribe(message => this.message = message);
     this.hospitalApi.currentHospital.subscribe(hospital => this.hospitalSelection = hospital);
@@ -46,78 +59,14 @@ export class SearchHospitalsComponent implements OnInit {
       aggMedicalStaffRating: 2,
       aggOverallRating: 3
     },
-    {
-      id: 2,
-      name: "Baylor Scott & White Medical Center Uptown",
-      address: "2727 East Lemmon Ave.",
-      city: "Dallas",
-      state: "TX",
-      zip: 75204,
-      phone: "(214) 443-3000",
-      website: "http://www.bmcuptown.com/",
-      aggClericalStaffRating: 2,
-      aggFacilityRating: 2,
-      aggMedicalStaffRating: 2,
-      aggOverallRating: 2
-    },
-    {
-      id: 3,
-      name: "Baylor University Medical Center",
-      address: "3500 Gaston Street",
-      city: "Dallas",
-      state: "TX",
-      zip: 75246,
-      phone: "(214) 820-0111",
-      website: "http://www.bswhealth.com/locations/dallas/Pages/default.aspx",
-      aggClericalStaffRating: 4,
-      aggFacilityRating: 4,
-      aggMedicalStaffRating: 4,
-      aggOverallRating: 4
-    },
-    {
-      id: 4,
-      name: "City Hospital at White Rock",
-      address: "9440 Poppy Drive",
-      city: "Dallas",
-      state: "TX",
-      zip: 75218,
-      phone: " (214) 324-6100",
-      website: "http://cityhospital.co/",
-      aggClericalStaffRating: 5,
-      aggFacilityRating: 5,
-      aggMedicalStaffRating: 5,
-      aggOverallRating: 5
-    },
-    {
-      id: 5,
-      name: "Dallas Medical Center",
-      address: "7 Medical Parkway ",
-      city: "Dallas",
-      state: "TX",
-      zip: 75234,
-      phone: "(972) 888-7000",
-      website: "http://www.dallasmedcenter.com/",
-      aggClericalStaffRating: 1,
-      aggFacilityRating: 1,
-      aggMedicalStaffRating: 1,
-      aggOverallRating: 1
-    },
-    {
-      id: 6,
-      name: "Dallas OverFlow Example",
-      address: "7 Medical Parkway ",
-      city: "Dallas",
-      state: "TX",
-      zip: 75234,
-      phone: "(972) 888-7000",
-      website: "http://www.dallasmedcenter.com/",
-      aggClericalStaffRating: 1,
-      aggFacilityRating: 1,
-      aggMedicalStaffRating: 1,
-      aggOverallRating: 1
-    },
   ]
-    //this.GetHospitals()
+    this.apiService.currentLocation.subscribe(location => {
+      this.location = location;
+      this.GetHospitals();
+      
+      console.log("hi");
+      console.log(this.results);
+      });
   }
   //Features to implement:
   //Get Hospitals()
@@ -127,13 +76,21 @@ export class SearchHospitalsComponent implements OnInit {
     .then(
       hospitals => {
         this.hospitals = hospitals; //uses promises to accept the api response
+        if(this.hospitals.length>25){
+          var i;
+          for(i = 0; i < 5; i++)
+          {
+            this.hospitals.pop(); //Removes last 5 address because google maps api has a limit on the amount of addresses allowed in a distance matrix
+          }
+        }
+        console.log(this.hospitals);
+        this.GetDistances();
         this.resetError(); //resets error message
       }, 
       error => {
         this.handleError(error); //handles error
       } 
     );
-    this.GetDistances();
   }
   //Creating a redirection function that will redirect to the viewreviews component with
   //the selected hospital
@@ -144,8 +101,50 @@ export class SearchHospitalsComponent implements OnInit {
   //Fetch distance between addresses using a distance matrix
   //Example: https://maps.googleapis.com/maps/api/distancematrix/outputFormat?parameters
   GetDistances(){
-    //Waiting for api to be done before implementing
-
+    //This should definitely be put in the Back End API on future itterations
+    var test = new google.maps.DistanceMatrixService;
+    var stringify = this.location.split(',');
+    //converting location into latlng
+    var latlng = {lat: parseFloat(stringify[0]), lng: parseFloat(stringify[1])};
+    //stringifying the addresses in hospital list
+    var arrayStrings: string[] = [];
+    this.hospitals.forEach(element => {
+      arrayStrings.push(element.address+", "+element.city+", "+element.state+" "+element.zip+", "+"USA");
+    });
+    var i;
+    console.log(this.geoCodedAddress);
+    console.log(`${this.geoCodedAddress}`);
+    test.getDistanceMatrix(
+      {
+        origins: [latlng],
+        destinations: arrayStrings,
+        travelMode: google.maps.TravelMode.DRIVING,
+        unitSystem: google.maps.UnitSystem.IMPERIAL
+      }, this.Callback
+    );
+  }
+  Callback(response, status) {
+    //Parse results from Distance Matrix
+    if (status == 'OK') {
+      var origins = response.originAddresses;
+      var destinations = response.destinationAddresses;
+      for (var i = 0; i < origins.length; i++) {
+        var resultList = response.rows[i].elements;
+        for (var j = 0; j < resultList.length; j++) {
+          var element = resultList[j];
+          var distance = element.distance.text;
+          //var duration = element.duration.text;
+          var from = origins[i];
+          var to = destinations[j];
+          var elementTest = top.document.getElementById(`${j+1}`);
+          elementTest.textContent=distance;
+        }
+        console.log(resultList);
+      }
+    }
+    else{
+      console.log(status);
+    }
   }
   //Change location function
   //Searchbar should be able to tell the map api to change the origin point and update the map

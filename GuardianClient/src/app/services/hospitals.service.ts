@@ -10,8 +10,9 @@ import { BehaviorSubject } from 'rxjs';
 export class HospitalsService {
   private baseUrl = environment.guardianApiBaseUrl;
   view: string = "main";
-
+  distance: any[];
   constructor(private http: HttpClient) { }
+  //giving it a mock hospital for initialization incase the api is down
   hospital: Hospital = {
     id: 1,
     name: "Baylor Scott & White Heart and Vascular Hospital",
@@ -34,13 +35,8 @@ export class HospitalsService {
   //Get all hospitals 
   //An idea to improve this would be to only get hospitals of a specific state and the surrounding states
   GetHospitals(){
-    return this.http.get<Hospital[]>(`${this.baseUrl}api/Hospitals`)
+    return this.http.get<Hospital[]>(`${this.baseUrl}/api/Hospitals`)
       .toPromise();
-  }
-  //Using the addresses of the hospital and user input
-  //Get the distances between them using google maps api distance matrix
-  GetDistances(){
-
   }
   //Allows the components to change the message
   changeHospitalMessage(hospitalSelect: Hospital,viewChange: string) {

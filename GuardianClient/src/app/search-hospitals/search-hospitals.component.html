@@ -38,12 +38,16 @@
         <div class="flex-container" style="text-align: center; ">
             <article class="column">
                 <div class="left-half" style="overflow-y:scroll;  text-align: left; ">
+
                     <!--This list will be changed to a ngfor hospitals loop once the api is complete -->
-                    <ol *ngFor="let hospitalList of hospitals" (click)="Redirect(this.hospitalList)">
-                        <a>Hospital Name: {{this.hospitalList.name}}</a> <br>
-                        <a>Address: {{this.hospitalList.address}}</a> <br>
-                        <a>Distance: N/A</a> <!--  -->
-                    </ol>
+                        <ol *ngFor="let hospitalList of hospitals"  (click)="Redirect(this.hospitalList)">
+                            <a>Hospital Name: {{this.hospitalList.name}}</a> <br>
+                            <a>Address: {{this.hospitalList.address}}</a> <br>
+                            <a>Distance: 
+                                <a id="{{this.hospitalList.id}}" class="distances">
+                                </a>
+                            </a> <!--  -->
+                        </ol>
                 </div>
             </article>
             <article class="column">
