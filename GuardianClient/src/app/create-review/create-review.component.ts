@@ -5,6 +5,7 @@ import Review from '../models/review';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ReviewsService } from '../services/reviews.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-create-review',
@@ -18,6 +19,7 @@ export class CreateReviewComponent implements OnInit {
   ClericalStaffRating: number;
   FacilityRating: number;
   OverallRating: number;
+  userID: number = 1;
   error: string | undefined;
   submitted: boolean = false;
   createReviewsForm = this.formBuilder.group({
@@ -29,7 +31,8 @@ export class CreateReviewComponent implements OnInit {
   constructor(
     private hospitalApi: HospitalsService,
     private formBuilder: FormBuilder,
-    private reviewService: ReviewsService
+    private reviewService: ReviewsService,
+    private cookieService: CookieService
     ) { }
   ngOnInit(): void {
     this.hospitalApi.currentView.subscribe(view => {
@@ -40,6 +43,7 @@ export class CreateReviewComponent implements OnInit {
     this.hospitalApi.currentHospital.subscribe(hospital => {
       this.hospitalSelected = hospital;
     });
+    this.userID = parseInt(this.cookieService.get('cookieId'));
   }
   //Create Reviews takes the input from the user and
   //posts it to the api database
@@ -47,7 +51,7 @@ export class CreateReviewComponent implements OnInit {
   {
     const newReviews: Review = {
       //id: 1,
-      userId: 1, //change this to a userID cookie
+      userId: this.userID, //change this to a userID cookie
       hospitalId: this.hospitalSelected.id,
       writtenFeedback: this.createReviewsForm.get('WrittenFeedback')?.value,
       dateAdmittance: this.createReviewsForm.get('DateAdmittance')?.value,
