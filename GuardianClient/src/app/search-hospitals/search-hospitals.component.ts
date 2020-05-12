@@ -23,10 +23,9 @@ export class SearchHospitalsComponent implements OnInit {
   hospitals: Hospital[] = [];
   hospitalSelection: Hospital;
   location: string = "";
-  geoCodedAddress: string = "";
   distanceInfo: any;
   error: string | undefined;
-  distanceFilter: string;
+  distanceFilter: number = 1000;
   ratingFilter: number = 0;
   view: string = "";
   tempObject: string;
@@ -84,7 +83,6 @@ export class SearchHospitalsComponent implements OnInit {
             this.hospitals.pop(); //Removes last 5 address because google maps api has a limit on the amount of addresses allowed in a distance matrix
           }
         }
-        console.log(this.hospitals);
         this.GetDistances();
         this.resetError(); //resets error message
       }, 
@@ -94,7 +92,14 @@ export class SearchHospitalsComponent implements OnInit {
     );
   }
   FilterRating(param:string){
+    this.GrabDistances();
+    this.SortHospitals('rating');
     this.ratingFilter = parseInt(param);
+  }
+  FilterLocation(param:string){
+    this.GrabDistances();
+    this.SortHospitals('location');
+    this.distanceFilter = parseInt(param);
   }
   //Creating a redirection function that will redirect to the viewreviews component with
   //the selected hospital
@@ -116,8 +121,6 @@ export class SearchHospitalsComponent implements OnInit {
       arrayStrings.push(element.address+", "+element.city+", "+element.state+" "+element.zip+", "+"USA");
     });
     var i;
-    console.log(this.geoCodedAddress);
-    console.log(`${this.geoCodedAddress}`);
     test.getDistanceMatrix(
       {
         origins: [latlng],
@@ -152,27 +155,33 @@ export class SearchHospitalsComponent implements OnInit {
   //Sorts the hospitals based on distance or ratings 
   SortHospitals(param: string)
   {
+    this.GrabDistances();
     if(param=='rating')
     {
       //sort based on rating
-      for(i=0; i < this.hospitals.length; i++){
-        this.hospitals[i].distance = top.document.getElementById(this.hospitals[i].id.toString()).textContent;
-      }
-      this.hospitals.sort((a, b) => (a.aggOverallRating > b.aggOverallRating) ? 1 : -1);
+      this.hospitals.sort((a, b) => (a.aggOverallRating < b.aggOverallRating) ? 1 : -1);
     }
     else
     {
-      var i;
-      for(i=0; i < this.hospitals.length; i++){
-        this.hospitals[i].distance = top.document.getElementById(this.hospitals[i].id.toString()).textContent;
-      }
       this.hospitals.sort((a, b) => (a.distance > b.distance) ? 1 : -1);
-      this.hospitals.pop();
     }
-    console.log(param);
+    //console.log(param);
     this.sorted=true;
     this.reset=true;
     this.reset=false;
+  }
+  //Pulls the distance data from all hospital formats
+  GrabDistances()
+  {
+    if(this.sorted==false){
+      var i;
+      for(i=0; i < this.hospitals.length; i++){
+        var tempString = top.document.getElementById(this.hospitals[i].id.toString()).textContent;
+        this.hospitals[i].distance = parseFloat(tempString.substring(0, tempString.length-3));
+      }
+      this.hospitals.pop();
+    }
+    this.sorted=true;
   }
   //Change location function
   //Searchbar should be able to tell the map api to change the origin point and update the map

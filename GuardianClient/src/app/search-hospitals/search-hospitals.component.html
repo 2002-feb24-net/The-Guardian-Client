@@ -8,8 +8,8 @@
 
             <a style="position: relative; left: 2em;">
                 <label for="location">Filter Location:</label>
-                <select id="location">
-                    <option value="all">All</option>
+                <select id="location" (change)="FilterLocation($event.target.value)">
+                    <option value="1000">All</option>
                     <option value="100">>100 Miles</option>
                     <option value="50">>50 Miles</option>
                     <option value="25">>25 Miles</option>
@@ -42,7 +42,7 @@
                     <!--This list will be changed to a ngfor hospitals loop once the api is complete -->
                     <a *ngIf="reset==false&&sorted==false">
                         <ol *ngFor="let hospitalList of hospitals" (click)="Redirect(this.hospitalList)">
-                            <a *ngIf="hospitalList.aggOverallRating>this.ratingFilter">
+                            <a *ngIf="hospitalList.aggOverallRating>=this.ratingFilter">
                                 <a>Hospital Name: {{hospitalList.name}}</a> <br>
                                 <a>Address: {{hospitalList.address}}</a> <br>
                                 <a>Distance:
@@ -54,14 +54,15 @@
                     </a>
                     <a *ngIf="reset==false&&sorted==true">
                         <ol *ngFor="let hospitalList of hospitals" (click)="Redirect(this.hospitalList)">
-                            <a *ngIf="hospitalList.aggOverallRating>this.ratingFilter">
+                            <a *ngIf="hospitalList.aggOverallRating>this.ratingFilter && hospitalList.distance<=this.distanceFilter">
                             <a>Hospital Name: {{this.hospitalList.name}}</a> <br>
                             <a>Address: {{this.hospitalList.address}}</a> <br>
                             <a>Distance:
                                 <a id="{{this.hospitalList.id}}" class="distances">
-                                    {{hospitalList.distance}}
+                                    {{hospitalList.distance}} mi
                                 </a>
                             </a> <!--  -->
+                            <script>$('a.section:empty').hide();</script>
                         </a>
                         </ol>
                     </a>
