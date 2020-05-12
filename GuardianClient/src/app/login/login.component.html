@@ -7,10 +7,12 @@
     <label>Email:</label><br>
     <input type="text" formControlName="email" name="email" required>
     <br>
-    <label>Password:</label><br>
-    <input type="text" formControlName="password" name="password" required>
-    <br>
-    <button type="submit" id="submit" [disabled]="!loginForm.valid">Submit</button>
+    <label>
+      Password:</label><br>
+      <input type="password" formControlName="password" name="password" required>
+    <p>
+      <button type="submit" id="submit" [disabled]="!loginForm.valid">Login</button>
+    </p>
   </form>
   <button id="back" routerLink="">Back</button>
 </div>
