@@ -1,6 +1,6 @@
 import Review from './review';
 export default interface User {
-    id: number;
+    id?: number;
     firstName: string;
     lastName: string;
     email: string;
@@ -9,8 +9,8 @@ export default interface User {
     city: string;
     state: string;
     zip: number;
-    accessLevel: boolean;
-    accountVerified: boolean;
-    accountDate: Date;
+    accessLevel?: boolean;
+    accountVerified?: boolean;
+    accountDate?: Date;
     reviews?: Review[];
 }
