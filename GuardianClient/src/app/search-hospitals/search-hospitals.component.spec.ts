@@ -48,6 +48,31 @@ describe('SearchHospitalsComponent', () => {
     component.ChangeLocation("Dallas");
     expect(component.hospitals).toBeTruthy();
   });
+  it('should grab distances', () => {
+    fixture = TestBed.createComponent(SearchHospitalsComponent);
+    component = fixture.componentInstance;
+    component.GrabDistances();
+    expect(component.hospitals).toBeTruthy();
+  });
+  it('should filter location', () => {
+    fixture = TestBed.createComponent(SearchHospitalsComponent);
+    component = fixture.componentInstance;
+    component.FilterLocation("0");
+    expect(component.hospitals).toBeTruthy();
+  });
+  it('should filter rating', () => {
+    fixture = TestBed.createComponent(SearchHospitalsComponent);
+    component = fixture.componentInstance;
+    component.FilterRating("0");
+    expect(component.hospitals).toBeTruthy();
+  });
+  it('should sort hospitals', () => {
+    fixture = TestBed.createComponent(SearchHospitalsComponent);
+    component = fixture.componentInstance;
+    component.SortHospitals('rating');
+    component.SortHospitals('location');
+    expect(component.hospitals).toBeTruthy();
+  });
   //Tests to implement
   //Test getting hospitals
   //Test getting distances

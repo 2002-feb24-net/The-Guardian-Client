@@ -91,11 +91,16 @@ export class SearchHospitalsComponent implements OnInit {
       } 
     );
   }
+  //takes user input from the select filter and sorts/filters the view accordingly
+  //This function filters by rating
+  //if the hospital is below the user input rating then it will not show in the view
   FilterRating(param:string){
     this.GrabDistances();
     this.SortHospitals('rating');
     this.ratingFilter = parseInt(param);
   }
+  //This function filters by location
+  //if the hospital is above the user input then it will not show in the view
   FilterLocation(param:string){
     this.GrabDistances();
     this.SortHospitals('location');
