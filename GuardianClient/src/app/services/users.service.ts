@@ -15,10 +15,26 @@ export class UsersService {
 
   createUser(user: User): Observable<User>{
     return this.http.post<User>(`${this.baseUrl}/api/Users`, user)
-    .pipe(
-      tap(_ => console.log('UsersService: Created user')),
-      catchError(this.handleError<User>('createUser'))
-    );
+      .pipe(
+        tap(_ => console.log('UsersService: Created user')),
+        catchError(this.handleError<User>('createUser'))
+      );
+  }
+
+  getUserById(id: number): Observable<User>{
+    return this.http.get<User>(`${this.baseUrl}/api/Users/${id}`)
+      .pipe(
+        tap(_ => console.log('UsersService: Fetched user by id')),
+        catchError(this.handleError<User>('getUserById'))
+      );
+  }
+
+  getUserByCredentials(email: string, password: string): Observable<User>{
+    return this.http.get<User>(`${this.baseUrl}/api/Users/${email}/${password}`)
+      .pipe(
+        tap(_ => console.log('UsersService: Fetched user by credentials')),
+        catchError(this.handleError<User>('getUserByCredentials'))
+      );
   }
 
     /**

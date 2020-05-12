@@ -42,7 +42,7 @@ export class CreateAccountComponent implements OnInit {
       this.message = "Invalid email.";
     else{
       var newUser: User = {
-        id: 0,
+        //id: 0,
         firstName: this.newAccountForm.get('fName').value,
         lastName: this.newAccountForm.get('lName').value,
         email: email,
@@ -52,7 +52,7 @@ export class CreateAccountComponent implements OnInit {
         state: this.newAccountForm.get('state').value,
         zip: Number(this.newAccountForm.get('zip').value)
       };
-      this.userService.createUser(newUser).subscribe();
+      var result = this.userService.createUser(newUser).subscribe();
       this.success = "Created new user: " + newUser.firstName + " " + newUser.lastName;
     }
   }
