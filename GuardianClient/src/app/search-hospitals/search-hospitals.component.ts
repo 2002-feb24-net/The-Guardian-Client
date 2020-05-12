@@ -26,12 +26,16 @@ export class SearchHospitalsComponent implements OnInit {
   geoCodedAddress: string = "";
   distanceInfo: any;
   error: string | undefined;
+  distanceFilter: string;
+  ratingFilter: number = 0;
   view: string = "";
   tempObject: string;
   parameters:string;
   results:  any[];
+  reset: boolean = false;
   origins: string[] = ['San Francisco CA'];
   destinations: string[] = ['New York NY', '41.8337329,-87.7321554'];
+  sorted: boolean = false;
   constructor(
     public hospitalApi: HospitalsService,
     public apiService: ApiService,
@@ -63,9 +67,6 @@ export class SearchHospitalsComponent implements OnInit {
     this.apiService.currentLocation.subscribe(location => {
       this.location = location;
       this.GetHospitals();
-      
-      console.log("hi");
-      console.log(this.results);
       });
   }
   //Features to implement:
@@ -91,6 +92,9 @@ export class SearchHospitalsComponent implements OnInit {
         this.handleError(error); //handles error
       } 
     );
+  }
+  FilterRating(param:string){
+    this.ratingFilter = parseInt(param);
   }
   //Creating a redirection function that will redirect to the viewreviews component with
   //the selected hospital
@@ -139,12 +143,36 @@ export class SearchHospitalsComponent implements OnInit {
           var elementTest = top.document.getElementById(`${j+1}`);
           elementTest.textContent=distance;
         }
-        console.log(resultList);
       }
     }
     else{
       console.log(status);
     }
+  }
+  //Sorts the hospitals based on distance or ratings 
+  SortHospitals(param: string)
+  {
+    if(param=='rating')
+    {
+      //sort based on rating
+      for(i=0; i < this.hospitals.length; i++){
+        this.hospitals[i].distance = top.document.getElementById(this.hospitals[i].id.toString()).textContent;
+      }
+      this.hospitals.sort((a, b) => (a.aggOverallRating > b.aggOverallRating) ? 1 : -1);
+    }
+    else
+    {
+      var i;
+      for(i=0; i < this.hospitals.length; i++){
+        this.hospitals[i].distance = top.document.getElementById(this.hospitals[i].id.toString()).textContent;
+      }
+      this.hospitals.sort((a, b) => (a.distance > b.distance) ? 1 : -1);
+      this.hospitals.pop();
+    }
+    console.log(param);
+    this.sorted=true;
+    this.reset=true;
+    this.reset=false;
   }
   //Change location function
   //Searchbar should be able to tell the map api to change the origin point and update the map
