@@ -1,6 +1,10 @@
 <h1 style=" font-size: 2em;" id="navbar"> Guardian
-    <span class="nav-link font-weight-bold text-blue d-none d-lg-block" style="text-align: right; float: right;  font-size: 0.5em; text-decoration: none;">Logged In As: {{FirstName}}</span>
-    <button type="button" class="myButton" style="text-align: right; float: right;  font-size: 0.5em; text-decoration: none;">
-        <a routerLink="login" style="text-decoration: none; color:white;"> Login </a> </button>
+    <button *ngIf="FirstName == ''"  type="button" class="myButton" style="text-align: right; float: right;  font-size: 0.5em; text-decoration: none;">
+        <a routerLink="login" style="text-decoration: none; color:white;"> Login </a>
+    </button>
+    <button *ngIf="FirstName != ''" type="button" class="myButton" style="text-align: right; float: right;  font-size: 0.5em; text-decoration: none;">
+        <a routerLink="logout" style="text-decoration: none; color:white;"> Sign out </a>
+    </button>
+    <span style="float: right; font-size: 1em; text-decoration: none; color: blue;" *ngIf="FirstName != ''">Hello, {{FirstName}}!</span>
 </h1>
 <app-search-hospitals></app-search-hospitals>

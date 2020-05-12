@@ -7,6 +7,7 @@ import { ApiService } from '../services/api.service';
 import User from '../models/user'
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,8 @@ testUser: User;
     private builder: FormBuilder,
     private CookieService: CookieService,
     private userApi: ApiService,
-    private router: Router
+    private router: Router,
+    private location: Location
 
   ) { }
 
@@ -59,8 +61,7 @@ testUser: User;
         this.CookieService.set('cookieAccountVerified', user.accountVerified.toString());
         this.CookieService.set('cookieAccountDate', user.accountDate.toString());
         this.CookieService.set('cookieReviews', user.reviews.toString());
-        //routing
-        this.router.navigateByUrl('');
+        this.location.back();
       },
       error => {
         this.handleError(error);

@@ -28,8 +28,9 @@ export class ApiService {
     this.locationSource.next(message);
   }
 
+  //getting a user by their email and password
   getUser(email: string,password: string) {
-    return this.httpClient.get<User>(`${this.baseUrl}api/users/${email}/${password}`)
+    return this.httpClient.get<User>(`${this.baseUrl}/api/users/${email}/${password}`)
       .toPromise();
   }
 

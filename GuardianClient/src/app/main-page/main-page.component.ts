@@ -19,7 +19,7 @@ export class MainPageComponent implements OnInit {
   getCookie() {
     let tempemail = this.cookieService.get('cookieFirstName');
     if (tempemail.length < 1) {
-      this.cookieService.set('cookieFirstName', 'Guest');
+      this.cookieService.set('cookieFirstName', '');
       this.cookieService.set('cookieEmail', '');
     }
 
