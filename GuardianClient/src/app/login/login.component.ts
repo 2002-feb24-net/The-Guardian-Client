@@ -7,6 +7,7 @@ import User from '../models/user'
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-login',
@@ -16,21 +17,18 @@ import { Location } from '@angular/common';
 export class LoginComponent implements OnInit {
   success: string = "";
   error: string = "";
+  testUser: User;
 
 loginForm = this.builder.group({
   email: ['', Validators.required],
   password: ['', Validators.required]
 })
 
-currEmail: string;
-currPassword: string;
-testUser: User;
-
-  constructor(
+  constructor (
     private builder: FormBuilder,
     private CookieService: CookieService,
     private userApi: ApiService,
-    private router: Router,
+    private userService: UsersService,
     private location: Location
 
   ) { }
@@ -38,6 +36,8 @@ testUser: User;
   ngOnInit(): void {}
 
   onSubmit(){
+    this.error = "";
+    this.success = "";
     const email = this.loginForm.get('email')?.value;
     const password = this.loginForm.get('password')?.value;
 
@@ -46,7 +46,6 @@ testUser: User;
       user => {
         this.testUser = user;
         console.log(user);
-        this.resetError();
         this.CookieService.set('cookieId', user.id.toString());
         this.CookieService.set('cookieFirstName', user.firstName);
         this.CookieService.set('cookieLastName', user.lastName);
@@ -60,14 +59,14 @@ testUser: User;
         this.CookieService.set('cookieAccountVerified', user.accountVerified.toString());
         this.CookieService.set('cookieAccountDate', user.accountDate.toString());
         this.CookieService.set('cookieReviews', user.reviews.toString());
-        this.location.back();
+        this.success = `Logging in as ${user.firstName} ${user.lastName}. Redirecting...`;
+        setTimeout(() => { this.location.back(); }, 2000);  //2s
       },
       error => {
-        this.handleError(error);
+        this.error = "Invalid username/password.";
+        //this.handleError(error);
       }
     );
-
-
   }
 
   handleError(error: HttpErrorResponse){

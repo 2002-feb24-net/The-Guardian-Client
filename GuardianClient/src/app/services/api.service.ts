@@ -29,7 +29,7 @@ export class ApiService {
   }
 
   //getting a user by their email and password
-  getUser(email: string,password: string) {
+  getUser(email: string, password: string) {
     return this.httpClient.get<User>(`${this.baseUrl}/api/users/${email}/${password}`)
       .toPromise();
   }
