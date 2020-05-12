@@ -1,50 +1,36 @@
-<!--<h1>Login</h1>
+<h3 align=center>Create New Account</h3>
 <div>
-  <form [formGroup]="newAccountForm" (ngSubmit)="onSubmit()">
+  <p id="error"><b>{{message}}</b></p>
+  <p id="success"><b>{{success}}</b></p>
+  <form align="center" [formGroup]="newAccountForm" (ngSubmit)="onSubmit()">
     <br>
-    <label>
-        First Name
-        <input type="text" formControlName="fName" name="fName" required>
-      </label>
-      <br>
-      <label>
-        Last Name
-        <input type="text" formControlName="lName" name="lName" required>
-      </label>
-      <br>
-      <label>
-        Address
-        <input type="text" formControlName="address" name="address" required>
-      </label>
-      <br>
-      <label>
-        City
-        <input type="text" formControlName="city" name="city" required>
-      </label>
-      <br>
-      <label>
-        State
-        <input type="text" formControlName="state" name="state" required>
-      </label>
-      <br>
-      <label>
-        Zip Code
-        <input type="text" formControlName="zip" name="zip" required>
-      </label>
-      <br>
-    <label>
-      Email
-      <input type="text" formControlName="email" name="email" required>
-    </label>
+    <label>Email:</label><br>
+    <input type="text" formControlName="email" name="email" required>
     <br>
-    <label>
-      Password
-      <input type="password" formControlName="password" name="password" required>
-    </label>
+    <label>Password:</label><br>
+    <input type="password" formControlName="password" name="password" required>
     <br>
-    <p>
-      <button type="submit" [disabled]="!newAccountForm.valid">Submit</button>
-    </p>
+    <label>First Name:</label><br>
+    <input type="text" formControlName="fName" name="fName" required>
+    <br>
+    <label>Last Name:</label><br>
+    <input type="text" formControlName="lName" name="lName" required>
+    <br>
+    <label>Address:</label><br>
+    <input type="text" formControlName="address" name="address" required>
+    <br>
+    <label>City:</label><br>
+    <input type="text" formControlName="city" name="city" required>
+    <br>
+    <label>State:</label><br>
+    <select id="statesList" formControlName="state" name="state" required>
+      <option *ngFor="let state of states" value="{{state}}">{{state}}</option>
+    </select>
+    <br>
+    <label>Zip Code:</label><br>
+    <input type="number" formControlName="zip" name="zip" required>
+    <br>
+      <button type="submit" [disabled]="!newAccountForm.valid" id="submit">Submit</button>
   </form>
+  <button routerLink="" id="back">Back</button>
 </div>
--->

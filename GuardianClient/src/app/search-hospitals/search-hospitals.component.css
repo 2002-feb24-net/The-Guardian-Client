@@ -37,3 +37,9 @@ ol {
 .flex-container .column.bg-alt{
   background: #b4bac0;
 }
+div:empty {
+  display: none;
+}
+section:empty {
+  display: none;
+}

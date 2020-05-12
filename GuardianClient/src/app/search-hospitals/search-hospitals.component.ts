@@ -23,15 +23,18 @@ export class SearchHospitalsComponent implements OnInit {
   hospitals: Hospital[] = [];
   hospitalSelection: Hospital;
   location: string = "";
-  geoCodedAddress: string = "";
   distanceInfo: any;
   error: string | undefined;
+  distanceFilter: number = 1000;
+  ratingFilter: number = 0;
   view: string = "";
   tempObject: string;
   parameters:string;
   results:  any[];
+  reset: boolean = false;
   origins: string[] = ['San Francisco CA'];
   destinations: string[] = ['New York NY', '41.8337329,-87.7321554'];
+  sorted: boolean = false;
   constructor(
     public hospitalApi: HospitalsService,
     public apiService: ApiService,
@@ -63,9 +66,6 @@ export class SearchHospitalsComponent implements OnInit {
     this.apiService.currentLocation.subscribe(location => {
       this.location = location;
       this.GetHospitals();
-      
-      console.log("hi");
-      console.log(this.results);
       });
   }
   //Features to implement:
@@ -83,7 +83,6 @@ export class SearchHospitalsComponent implements OnInit {
             this.hospitals.pop(); //Removes last 5 address because google maps api has a limit on the amount of addresses allowed in a distance matrix
           }
         }
-        console.log(this.hospitals);
         this.GetDistances();
         this.resetError(); //resets error message
       }, 
@@ -91,6 +90,21 @@ export class SearchHospitalsComponent implements OnInit {
         this.handleError(error); //handles error
       } 
     );
+  }
+  //takes user input from the select filter and sorts/filters the view accordingly
+  //This function filters by rating
+  //if the hospital is below the user input rating then it will not show in the view
+  FilterRating(param:string){
+    this.GrabDistances();
+    this.SortHospitals('rating');
+    this.ratingFilter = parseInt(param);
+  }
+  //This function filters by location
+  //if the hospital is above the user input then it will not show in the view
+  FilterLocation(param:string){
+    this.GrabDistances();
+    this.SortHospitals('location');
+    this.distanceFilter = parseInt(param);
   }
   //Creating a redirection function that will redirect to the viewreviews component with
   //the selected hospital
@@ -112,8 +126,6 @@ export class SearchHospitalsComponent implements OnInit {
       arrayStrings.push(element.address+", "+element.city+", "+element.state+" "+element.zip+", "+"USA");
     });
     var i;
-    console.log(this.geoCodedAddress);
-    console.log(`${this.geoCodedAddress}`);
     test.getDistanceMatrix(
       {
         origins: [latlng],
@@ -139,12 +151,42 @@ export class SearchHospitalsComponent implements OnInit {
           var elementTest = top.document.getElementById(`${j+1}`);
           elementTest.textContent=distance;
         }
-        console.log(resultList);
       }
     }
     else{
       console.log(status);
     }
+  }
+  //Sorts the hospitals based on distance or ratings 
+  SortHospitals(param: string)
+  {
+    this.GrabDistances();
+    if(param=='rating')
+    {
+      //sort based on rating
+      this.hospitals.sort((a, b) => (a.aggOverallRating < b.aggOverallRating) ? 1 : -1);
+    }
+    else
+    {
+      this.hospitals.sort((a, b) => (a.distance > b.distance) ? 1 : -1);
+    }
+    //console.log(param);
+    this.sorted=true;
+    this.reset=true;
+    this.reset=false;
+  }
+  //Pulls the distance data from all hospital formats
+  GrabDistances()
+  {
+    if(this.sorted==false){
+      var i;
+      for(i=0; i < this.hospitals.length; i++){
+        var tempString = top.document.getElementById(this.hospitals[i].id.toString()).textContent;
+        this.hospitals[i].distance = parseFloat(tempString.substring(0, tempString.length-3));
+      }
+      this.hospitals.pop();
+    }
+    this.sorted=true;
   }
   //Change location function
   //Searchbar should be able to tell the map api to change the origin point and update the map

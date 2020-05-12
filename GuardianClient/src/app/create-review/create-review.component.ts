@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { HospitalsService } from '../services/hospitals.service';
 import Hospital from '../models/hospital';
 import Review from '../models/review';
@@ -22,7 +22,7 @@ export class CreateReviewComponent implements OnInit {
   submitted: boolean = false;
   createReviewsForm = this.formBuilder.group({
     WrittenFeedback: ['', Validators.required],
-    DateAdmittance: ['', Validators.required],
+    DateAdmittance: ["2020-01-01T12:00", Validators.required],
     Reason: ['', Validators.required],
   });
   
