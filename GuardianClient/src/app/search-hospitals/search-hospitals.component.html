@@ -5,11 +5,11 @@
                 placeholder="Search by Name, City, Zipcode, Address">
         </div> <br>
         <div id="filters" style="left: 8em; position: relative; font-size: larger;">
-            
+
             <a style="position: relative; left: 2em;">
                 <label for="location">Filter Location:</label>
-                <select id="location">
-                    <option value="all">All</option>
+                <select id="location" (change)="FilterLocation($event.target.value)">
+                    <option value="1000">All</option>
                     <option value="100">>100 Miles</option>
                     <option value="50">>50 Miles</option>
                     <option value="25">>25 Miles</option>
@@ -18,16 +18,16 @@
             </a>
             <a style="position: relative; left: 3em;" id="divrating">
                 <label for="rating">Filter Rating:</label>
-                <select id="rating">
-                    <option value="all">All</option>
-                    <option value="4stars">>4 Stars</option>
-                    <option value="3stars">>3 Stars</option>
-                    <option value="2stars">>2 Stars</option>
+                <select id="rating" (change)="FilterRating($event.target.value)">
+                    <option value="0">All</option>
+                    <option value="4">>4 Stars</option>
+                    <option value="3">>3 Stars</option>
+                    <option value="2">>2 Stars</option>
                 </select>
             </a>
             <a style="position: relative; left: 4em;" id="divorder">
                 <label for="order">Order by:</label>
-                <select id="rating">
+                <select id="rating" (change)="SortHospitals($event.target.value)">
                     <option value="location">Location</option>
                     <option value="rating">Rating</option>
                 </select>
@@ -40,14 +40,32 @@
                 <div class="left-half" style="overflow-y:scroll;  text-align: left; ">
 
                     <!--This list will be changed to a ngfor hospitals loop once the api is complete -->
-                        <ol *ngFor="let hospitalList of hospitals"  (click)="Redirect(this.hospitalList)">
+                    <a *ngIf="reset==false&&sorted==false">
+                        <ol *ngFor="let hospitalList of hospitals" (click)="Redirect(this.hospitalList)">
+                            <a *ngIf="hospitalList.aggOverallRating>=this.ratingFilter">
+                                <a>Hospital Name: {{hospitalList.name}}</a> <br>
+                                <a>Address: {{hospitalList.address}}</a> <br>
+                                <a>Distance:
+                                    <a id="{{this.hospitalList.id}}" class="distances">
+                                    </a>
+                                </a> <!--  -->
+                            </a>
+                        </ol>
+                    </a>
+                    <a *ngIf="reset==false&&sorted==true">
+                        <ol *ngFor="let hospitalList of hospitals" (click)="Redirect(this.hospitalList)">
+                            <a *ngIf="hospitalList.aggOverallRating>this.ratingFilter && hospitalList.distance<=this.distanceFilter">
                             <a>Hospital Name: {{this.hospitalList.name}}</a> <br>
                             <a>Address: {{this.hospitalList.address}}</a> <br>
-                            <a>Distance: 
+                            <a>Distance:
                                 <a id="{{this.hospitalList.id}}" class="distances">
+                                    {{hospitalList.distance}} mi
                                 </a>
                             </a> <!--  -->
+                            <script>$('a.section:empty').hide();</script>
+                        </a>
                         </ol>
+                    </a>
                 </div>
             </article>
             <article class="column">

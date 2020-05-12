@@ -14,4 +14,5 @@ export default interface Hospital {
     aggFacilityRating: number;
     aggOverallRating: number;
     reviews?: Review[];
+    distance?: number;
 }

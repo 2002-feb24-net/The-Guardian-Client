@@ -1,3 +1,4 @@
+
 <a *ngIf="view=='view'">
     <button type="button" class="myButton" style="text-align: left; float: left;" (click)="redirect(' ')">
         Back
@@ -42,9 +43,9 @@
                 Reviews
             </h1>
             <a
-                style=" border-style: solid; border-color: black; left: 6em; right: 25%; position:fixed; padding: 0.5em;">
+                style=" position: absolute; border-style: solid; border-color: black; left: 2em; right: 10%; width:81.05em; padding: 0.5em;">
                 <a *ngIf="hospital.reviews[0]!=null&&this.showReviews==false">
-                    <a style="position: fixed; float:left;">
+                    <a style="position: absolute; float:left;">
                         Medical Care Staff: <ngb-rating [(rate)]="this.hospital.reviews[0].medicalStaffRating"
                         [readonly]="true" [max]="5"></ngb-rating>
                     </a>
@@ -57,13 +58,13 @@
                     <a style=" position: relative; float: left; right: 25%; left: 10em; width:50%; height: 5em; border-style: solid; border-color: black; padding: 0.5em; overflow-y: scroll; overflow-wrap: break-word;">
                             {{this.hospital.reviews[0].writtenFeedback}}
                     </a><br>
-                    <a style="float:left; position: fixed; left:10em;">
+                    <a style="float:left; position:relative;  right: 50em;">
                         <a>
                             Clerical Staff: <ngb-rating [(rate)]="this.hospital.reviews[0].clericalStaffRating"
                             [readonly]="true" [max]="5"></ngb-rating> <br>
                         </a> 
                     </a><br>
-                    <a style="float:left; position: fixed; left:10em; ">
+                    <a style="float:left; position:relative;  right: 48em;">
                         <strong>Overall: <ngb-rating [(rate)]="this.hospital.reviews[0].overallRating" [readonly]="true"
                             [max]="5"></ngb-rating></strong>
                     </a><br> <br>
@@ -95,13 +96,12 @@
                             <a style=" position: relative; float: left; right: 25%; left: 10em; width:50%; height: 5em; border-style: solid; border-color: black; padding: 0.5em; overflow-y: scroll; overflow-wrap: break-word;">
                                     {{reviewList.writtenFeedback}}
                             </a><br>
-                            <a style="float:left; position: fixed; left:10em;">
-                                <a>
+                            <a style="float:left; position:relative;  right: 50em;">
+
                                     Clerical Staff: <ngb-rating [(rate)]="reviewList.clericalStaffRating"
-                                    [readonly]="true" [max]="5"></ngb-rating> <br>
-                                </a> 
+                                    [readonly]="true" [max]="5"></ngb-rating> 
                             </a><br>
-                            <a style="float:left; position: fixed; left:10em; ">
+                            <a style="float:left; position:relative;  right: 48em; ">
                                 <strong>Overall: <ngb-rating [(rate)]="reviewList.overallRating" [readonly]="true"
                                     [max]="5"></ngb-rating></strong>
                             </a><br> <br>
@@ -127,5 +127,4 @@
         </div>
     </a>
 </a>
-
 <app-create-review></app-create-review>

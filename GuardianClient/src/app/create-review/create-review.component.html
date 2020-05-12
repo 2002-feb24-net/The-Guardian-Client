@@ -4,9 +4,9 @@
             style="text-align: right; float: right;  font-size: 0.5em; text-decoration: none;" routerLink="logout"> Sign
             Out </button>
     </h1><br>
-    <h1 id="header" style="font-size: 3em; text-align: center;">
+    <h1 id="header" style="font-size: 3em; text-align: center; position: relative; left: 1em;">
         Leave a Review
-        <h2 id="hospitalName" style="font-size: 0.5em; text-align: center;">
+        <h2 id="hospitalName" style="font-size: 0.5em; text-align: center; position: relative; right: 2em;">
             {{this.hospitalSelected.name}}
         </h2>
     </h1>
@@ -19,12 +19,12 @@
                     Date Admittance:
                     <input type="datetime-local" formControlName="DateAdmittance" required>
                 </a> <br>
-                <a style="right:0.75em; position: relative;">
+                <a style="left:4.5em; position: relative;">
                     Facilities
                     <ngb-rating [(rate)]="FacilityRating" [rate]="1" [max]="5"></ngb-rating> 
-                    <a style="left:5em; position: relative;">
+                    <a style="left:9em; position: relative;">
                         Reason:
-                        <input type="text" formControlName="Reason" placeholder="Consultation, Surgery, Post Surgery, Emergency, Other" required>
+                        <input type="text" size="50" formControlName="Reason" placeholder="Consultation, Surgery, Post Surgery, Emergency, Other" required>
                     </a> <br>
                 </a>
                 <a style="right:9.5em; position: relative;">
@@ -49,6 +49,7 @@
         <br>
         <h1 style=" text-align: center;">
             Review Submitted!
-        </h1>
+        </h1> <br>
+        <button class="myButton" type="button" style="position:relative; " (click)="redirectToHome()"> Leave </button>
     </a>
 </a>
