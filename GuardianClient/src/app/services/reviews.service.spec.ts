@@ -1,24 +1,22 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpErrorResponse, HttpClient, HttpHandler } from '@angular/common/http';
-import { HospitalsService } from './hospitals.service';
-import Hospital  from '../models/hospital';
+import { ReviewsService } from './reviews.service';
 
-describe('HospitalsService', () => {
-  let service: HospitalsService;
-  let hospital: Hospital;
+describe('ReviewsService', () => {
+  let service: ReviewsService;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [HttpClient,HttpHandler]
     });
-    service = TestBed.inject(HospitalsService);
+    service = TestBed.inject(ReviewsService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-  it('should get hospitals', () => {
-    service.GetHospitals();
+  it('should create reviews', () => {
+    service.CreateReviews(null);
     expect(service).toBeTruthy();
   });
-
 });

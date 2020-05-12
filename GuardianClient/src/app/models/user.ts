@@ -1,13 +1,16 @@
+import Review from './review';
 export default interface User {
     id: number;
-    FirstName: string;
-    LastName: string;
-    Email: string;
-    Password: string;
-    Address: string;
-    City: string;
-    State: string;
-    Zip: number;
-    AccessLevel: string;
-    AccountVerified: boolean;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    address: string;
+    city: string;
+    state: string;
+    zip: number;
+    accessLevel: boolean;
+    accountVerified: boolean;
+    accountDate: Date;
+    reviews?: Review[];
 }

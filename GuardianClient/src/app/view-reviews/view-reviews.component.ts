@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class ViewReviewsComponent implements OnInit {
   reviewList: review[];
   hospital: hospital;
+  showReviews=false;
   ratingsCount: number = 0;
   view: string = "";
   constructor(
@@ -27,16 +28,16 @@ export class ViewReviewsComponent implements OnInit {
       this.ratingsCount = 5;
       this.reviewList = [{
         id: 1,
-        UserId: 1,
-        HospitalId: 1,
-        MedicalStaffRating: 4,
-        ClericalStaffRating: 4,
-        FacilityRating: 5,
-        OverallRating: Math.round(((4 + 4 + 5) / 3) * 100) / 100,
-        WrittenFeedback: "This Hospital was great!!! Staff was good and facilities were great but it took so long",
-        DateAdmittance: new Date(),
-        DateSubmitted: new Date(),
-        ReasonId: 1,
+        userId: 1,
+        hospitalId: 1,
+        medicalStaffRating: 1,
+        clericalStaffRating: 1,
+        facilityRating: 1,
+        overallRating: 1,
+        writtenFeedback: "This Hospital was great!!! Staff was good and facilities were great but it took so long",
+        dateAdmittance: new Date(),
+        dateSubmitted: new Date(),
+        reason: "reason"
       }];
     });
     this.hospitalApi.currentView.subscribe(view => {
@@ -58,5 +59,8 @@ export class ViewReviewsComponent implements OnInit {
       this.hospitalApi.changeHospitalMessage(this.hospital,path);
     }
   }
-
+  ShowAll(param:string){
+    console.log(param);
+    this.showReviews=true;
+  }
 }
