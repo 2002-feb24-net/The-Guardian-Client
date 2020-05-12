@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { CreateAccountComponent } from './create-account.component';
+import { HttpErrorResponse, HttpClient, HttpHandler } from '@angular/common/http';
 
 describe('CreateAccountComponent', () => {
   let component: CreateAccountComponent;
@@ -9,7 +10,7 @@ describe('CreateAccountComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ CreateAccountComponent ],
-      providers: [ FormBuilder ]
+      providers: [ FormBuilder, HttpClient, HttpHandler ]
     })
     .compileComponents();
   }));
@@ -21,6 +22,10 @@ describe('CreateAccountComponent', () => {
   });
 
   it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+  it('should submit', () => {
+    component.onSubmit();
     expect(component).toBeTruthy();
   });
 });
