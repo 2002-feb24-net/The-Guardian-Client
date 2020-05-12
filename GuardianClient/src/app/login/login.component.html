@@ -1,19 +1,16 @@
-<h1>Login</h1>
+<h3 align="center">Login</h3>
 <div>
+  <p id="success">{{success}}</p>
+  <p id="error">{{error}}</p>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <br>
-    <label>
-      Email
-      <input type="text" formControlName="email" name="email" required>
-    </label>
+    <label>Email:</label><br>
+    <input type="text" formControlName="email" name="email" required>
     <br>
-    <label>
-      Password
-      <input type="text" formControlName="password" name="password" required>
-    </label>
+    <label>Password:</label><br>
+    <input type="text" formControlName="password" name="password" required>
     <br>
-    <p>
-      <button type="submit" [disabled]="!loginForm.valid">Submit</button>
-    </p>
+    <button type="submit" id="submit" [disabled]="!loginForm.valid">Submit</button>
   </form>
+  <button id="back" routerLink="">Back</button>
 </div>

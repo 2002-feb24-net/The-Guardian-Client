@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import User from '../models/user';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -10,8 +10,14 @@ import { tap, catchError } from 'rxjs/operators';
 })
 export class UsersService {
   private baseUrl = environment.guardianApiBaseUrl;
+  private user = new BehaviorSubject<User>(null);
+  currentUser = this.user.asObservable();
 
   constructor(private http: HttpClient) { }
+
+  userLoggedIn(user: User){
+    this.user.next(user);
+  }
 
   createUser(user: User): Observable<User>{
     return this.http.post<User>(`${this.baseUrl}/api/Users`, user)
