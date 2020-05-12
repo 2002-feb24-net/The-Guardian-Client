@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import Hospital from '../models/hospital';
-import Reason from '../models/reason';
 import Review from '../models/review';
 import User from '../models/user';
 

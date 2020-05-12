@@ -47,16 +47,18 @@ testUser: User;
         console.log(user);
         this.resetError();
         this.CookieService.set('cookieId', user.id.toString());
-        this.CookieService.set('cookieFirstName', user.FirstName);
-        this.CookieService.set('cookieLastName', user.LastName);
-        this.CookieService.set('cookieEmail', user.Email);
-        this.CookieService.set('cookiePassword', user.Password);
-        this.CookieService.set('cookieAddress', user.Address);
-        this.CookieService.set('cookieCity', user.City);
-        this.CookieService.set('cookieState', user.State);
-        this.CookieService.set('cookieZip', user.Zip.toString());
-        this.CookieService.set('cookieAccessLevel', user.AccessLevel);
-        this.CookieService.set('cookieAccountVerified', user.AccountVerified.toString());
+        this.CookieService.set('cookieFirstName', user.firstName);
+        this.CookieService.set('cookieLastName', user.lastName);
+        this.CookieService.set('cookieEmail', user.email);
+        this.CookieService.set('cookiePassword', user.password);
+        this.CookieService.set('cookieAddress', user.address);
+        this.CookieService.set('cookieCity', user.city);
+        this.CookieService.set('cookieState', user.state);
+        this.CookieService.set('cookieZip', user.zip.toString());
+        this.CookieService.set('cookieAccessLevel', user.accessLevel.toString());
+        this.CookieService.set('cookieAccountVerified', user.accountVerified.toString());
+        this.CookieService.set('cookieAccountDate', user.accountDate.toString());
+        this.CookieService.set('cookieReviews', user.reviews.toString());
         //routing
         this.router.navigateByUrl('');
       },
