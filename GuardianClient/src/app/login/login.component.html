@@ -9,11 +9,14 @@
     <br>
     <label>
       Password
-      <input type="text" formControlName="password" name="password" required>
+      <input type="password" formControlName="password" name="password" required>
     </label>
     <br>
     <p>
-      <button type="submit" [disabled]="!loginForm.valid">Submit</button>
+      <button type="submit" [disabled]="!loginForm.valid">Login</button>
     </p>
+    <!-- <p>
+      <button type="submit">Create an Account</button>
+    </p> -->
   </form>
 </div>
