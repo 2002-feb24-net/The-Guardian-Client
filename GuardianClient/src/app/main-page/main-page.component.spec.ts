@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SearchHospitalsComponent } from '../search-hospitals/search-hospitals.component';
 import { MainPageComponent } from './main-page.component';
 import { HttpClient, HttpHandler } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('MainPageComponent', () => {
   let component: MainPageComponent;
@@ -10,7 +11,8 @@ describe('MainPageComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ MainPageComponent, SearchHospitalsComponent ],
-      providers: [HttpClient,HttpHandler]
+      providers: [HttpClient,HttpHandler],
+      imports: [RouterTestingModule ]
     })
     .compileComponents();
   }));
@@ -21,7 +23,12 @@ describe('MainPageComponent', () => {
     fixture.detectChanges();
   });
 
-  //it('should create', () => {
-  //  expect(component).toBeTruthy();
-  //});
+  it('cookie first name', () => {
+    component.getCookie();
+    expect(component).toBeTruthy();
+  });
+
+  it('should create', () => {
+   expect(component).toBeTruthy();
+  });
 });

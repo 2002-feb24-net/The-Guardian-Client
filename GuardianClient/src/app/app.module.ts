@@ -17,6 +17,7 @@ import { ViewReviewsComponent } from './view-reviews/view-reviews.component';
 import { EditReviewComponent } from './edit-review/edit-review.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateReviewComponent } from './create-review/create-review.component';
+import { CookieService } from 'ngx-cookie-service'
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -48,7 +49,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule
   ],
   exports: [],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
