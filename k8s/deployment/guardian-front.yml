@@ -20,5 +20,6 @@ spec:
       containers:
       - name: guardian-front
         image: anvelez26/theguardianclient:v1.2
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
