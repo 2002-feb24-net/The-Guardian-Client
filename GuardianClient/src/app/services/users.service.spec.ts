@@ -20,4 +20,12 @@ describe('UsersService', () => {
     service.createUser(user);
     expect(service).toBeTruthy();
   });
+  it('should get users by id', () => {
+    service.getUserById(1);
+    expect(service).toBeTruthy();
+  });
+  it('should get users by credentials', () => {
+    service.getUserByCredentials('string','string');
+    expect(service).toBeTruthy();
+  });
 });

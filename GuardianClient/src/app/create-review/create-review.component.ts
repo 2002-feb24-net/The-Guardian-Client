@@ -43,6 +43,7 @@ export class CreateReviewComponent implements OnInit {
     this.hospitalApi.currentHospital.subscribe(hospital => {
       this.hospitalSelected = hospital;
     });
+    this.hospitalApi.changeHospitalMessage(this.hospitalSelected, 'main');
     this.userID = parseInt(this.cookieService.get('cookieId'));
   }
   //Create Reviews takes the input from the user and

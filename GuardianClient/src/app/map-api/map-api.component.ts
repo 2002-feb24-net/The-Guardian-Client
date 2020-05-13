@@ -15,7 +15,7 @@ export class MapApiComponent implements OnInit {
   map: any;
   isLoaded: boolean = false;
   marker: google.maps.Marker;
-  location: string = "Dallas";
+  location: string = "Startup";
   message: string = "Fort Worth"; //userinput
   constructor(public apiService: ApiService) { }
 
@@ -51,7 +51,6 @@ export class MapApiComponent implements OnInit {
     }
   }
   changeLocation() {
-    console.log(this.message);
     if(top.document.getElementById("maptest") != null){
       top.document.getElementById("maptest").setAttribute("src",`https://www.google.com/maps/embed/v1/search?key=AIzaSyBqPMgrXjT5aOT2gG1DN1QIzw1QqpEDL7E&q=hospitals+near+${this.message}&zoom=10`);
     }

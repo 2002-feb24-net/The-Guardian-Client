@@ -71,6 +71,7 @@ export class SearchHospitalsComponent implements OnInit {
       }
       else{
         this.location = location;
+        this.sorted=false;
       }
       });
   }
@@ -123,10 +124,6 @@ export class SearchHospitalsComponent implements OnInit {
   GetDistances(){
     //This should definitely be put in the Back End API on future itterations
     var test = new google.maps.DistanceMatrixService;
-    var stringify = this.location.split(',');
-    //converting location into latlng
-    var latlng = {lat: parseFloat(stringify[0]), lng: parseFloat(stringify[1])};
-    //stringifying the addresses in hospital list
     var arrayStrings: string[] = [];
     this.hospitals.forEach(element => {
       arrayStrings.push(element.address+", "+element.city+", "+element.state+" "+element.zip+", "+"USA");
@@ -134,7 +131,7 @@ export class SearchHospitalsComponent implements OnInit {
     var i;
     test.getDistanceMatrix(
       {
-        origins: [latlng],
+        origins: [this.location],
         destinations: arrayStrings,
         travelMode: google.maps.TravelMode.DRIVING,
         unitSystem: google.maps.UnitSystem.IMPERIAL
@@ -198,8 +195,9 @@ export class SearchHospitalsComponent implements OnInit {
   ChangeLocation(userInput: string){
     userInput = userInput.replace("%20","+");
     console.log(userInput);
+    this.location=userInput;
     this.apiService.changeLocation(userInput);
-    this.SortHospitals('distance');
+    this.GetHospitals();
   }
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

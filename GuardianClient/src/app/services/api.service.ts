@@ -16,7 +16,7 @@ export class ApiService {
 
   private messageSource = new BehaviorSubject('Fort Worth');
   currentMessage = this.messageSource.asObservable();
-  private locationSource = new BehaviorSubject('Australia');
+  private locationSource = new BehaviorSubject('Startup');
   currentLocation = this.locationSource.asObservable();
 
   constructor(private httpClient: HttpClient) { }

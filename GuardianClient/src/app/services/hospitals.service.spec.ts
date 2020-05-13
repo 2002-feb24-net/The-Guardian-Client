@@ -20,5 +20,9 @@ describe('HospitalsService', () => {
     service.GetHospitals();
     expect(service).toBeTruthy();
   });
+  it('should change hospitals', () => {
+    service.changeHospitalMessage(hospital, 'string');
+    expect(service).toBeTruthy();
+  });
 
 });
