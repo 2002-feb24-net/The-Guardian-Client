@@ -21,6 +21,7 @@ describe('MapApiComponent', () => {
   });
 
   it('should create', () => {
+    component.ngOnInit();
     expect(component).toBeTruthy();
   });
   it('should geolocate', () => {

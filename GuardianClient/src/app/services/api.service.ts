@@ -14,9 +14,9 @@ export class ApiService {
   private email;
   private password;
 
-  private messageSource = new BehaviorSubject('default message');
+  private messageSource = new BehaviorSubject('Fort Worth');
   currentMessage = this.messageSource.asObservable();
-  private locationSource = new BehaviorSubject('default message');
+  private locationSource = new BehaviorSubject('Startup');
   currentLocation = this.locationSource.asObservable();
 
   constructor(private httpClient: HttpClient) { }

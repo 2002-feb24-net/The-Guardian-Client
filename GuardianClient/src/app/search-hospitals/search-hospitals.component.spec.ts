@@ -22,6 +22,7 @@ describe('SearchHospitalsComponent', () => {
   });
 
   it('should create', () => {
+    component.ngOnInit();
     expect(component).toBeTruthy();
   });
   it('should get hospitals', () => {

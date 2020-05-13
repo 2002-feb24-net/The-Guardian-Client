@@ -1,4 +1,4 @@
-<a *ngIf="view=='createReview'">
+
     <h1 style=" font-size: 2em;">
         <button class="myButton" type="button"
             style="text-align: right; float: right;  font-size: 0.5em; text-decoration: none;" routerLink="logout"> Sign
@@ -34,10 +34,11 @@
                 <a style="right:8.25em; position: relative;">
                     Overall
                     <ngb-rating [rate]="(FacilityRating+MedicalStaffRating+ClericalStaffRating)/3" [max]="5" [readonly]="true"></ngb-rating> <br>
-                </a> <br>
+                </a> 
                 Comment:
-                <input type="text" formControlName="WrittenFeedback" style="height:5em; width: 20em; overflow: scroll;"required> <br> <br>
-                <button class="myButton" type="button" style="position:relative; right: 3em; " (click)="redirectToHome()"> Leave </button>
+                <textarea formControlName="WrittenFeedback" style="height:5em; position:relative; top:4em; width: 20em; overflow-y: scroll;"required></textarea> <br> <br>
+                <br> <br>
+                <button class="myButton" type="button" style="position:relative; right: 3em; " routerLink=''> Leave </button>
                 <button type="submit" [disabled]="!this.createReviewsForm.valid" class="myButton" style="position:relative; left: 3em; text-decoration: none;">
                     Submit Review
                 </button>
@@ -49,7 +50,6 @@
         <br>
         <h1 style=" text-align: center;">
             Review Submitted! <br>
-            <button class="myButton" type="button" (click)="redirectToHome()"> Leave </button>
+            <button class="myButton" type="button" routerLink=''> Leave </button>
         </h1> <br>
     </a>
-</a>

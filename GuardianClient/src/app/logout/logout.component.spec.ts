@@ -21,6 +21,12 @@ describe('LogoutComponent', () => {
   });
 
   it('should create', () => {
+    component.ngOnInit();
+    expect(component).toBeTruthy();
+  });
+
+  it('should logout', () => {
+    component.onSubmit();
     expect(component).toBeTruthy();
   });
 });
