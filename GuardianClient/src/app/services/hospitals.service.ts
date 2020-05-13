@@ -35,7 +35,7 @@ export class HospitalsService {
   //Get all hospitals 
   //An idea to improve this would be to only get hospitals of a specific state and the surrounding states
   GetHospitals(){
-    return this.http.get<Hospital[]>(`${this.baseUrl}/api/Hospitals`)
+    return this.http.get<Hospital[]>(`${this.baseUrl}api/Hospitals`)
       .toPromise();
   }
   //Allows the components to change the message

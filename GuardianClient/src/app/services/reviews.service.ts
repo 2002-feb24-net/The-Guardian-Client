@@ -11,7 +11,7 @@ export class ReviewsService {
   constructor(private http: HttpClient) { }
   CreateReviews(newReview: Review)
   {
-    return this.http.post<Review>(`${this.baseUrl}/api/Reviews`, newReview)
+    return this.http.post<Review>(`${this.baseUrl}api/Reviews`, newReview)
       .toPromise();
   }
 }
