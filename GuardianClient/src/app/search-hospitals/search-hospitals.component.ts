@@ -22,7 +22,7 @@ export class SearchHospitalsComponent implements OnInit {
   message:string;
   hospitals: Hospital[] = [];
   hospitalSelection: Hospital;
-  location: string = "";
+  location: string = "Startup";
   distanceInfo: any;
   error: string | undefined;
   distanceFilter: number = 1000;
@@ -34,6 +34,7 @@ export class SearchHospitalsComponent implements OnInit {
   reset: boolean = false;
   origins: string[] = ['San Francisco CA'];
   destinations: string[] = ['New York NY', '41.8337329,-87.7321554'];
+  firstTime: number = 0;
   sorted: boolean = false;
   constructor(
     public hospitalApi: HospitalsService,
@@ -64,8 +65,13 @@ export class SearchHospitalsComponent implements OnInit {
     },
   ]
     this.apiService.currentLocation.subscribe(location => {
-      this.location = location;
-      this.GetHospitals();
+      if(this.location == 'Startup'){
+        this.location = location;
+        this.GetHospitals();
+      }
+      else{
+        this.location = location;
+      }
       });
   }
   //Features to implement:
@@ -145,7 +151,6 @@ export class SearchHospitalsComponent implements OnInit {
         for (var j = 0; j < resultList.length; j++) {
           var element = resultList[j];
           var distance = element.distance.text;
-          //var duration = element.duration.text;
           var from = origins[i];
           var to = destinations[j];
           var elementTest = top.document.getElementById(`${j+1}`);
@@ -193,8 +198,8 @@ export class SearchHospitalsComponent implements OnInit {
   ChangeLocation(userInput: string){
     userInput = userInput.replace("%20","+");
     console.log(userInput);
-    this.apiService.changeMessage(userInput);
-    this.GetDistances();
+    this.apiService.changeLocation(userInput);
+    this.SortHospitals('distance');
   }
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

@@ -25,6 +25,8 @@ export class MapApiComponent implements OnInit {
     this.apiService.currentLocation.subscribe(location => 
       {
         this.location = location;
+        this.message = location;
+        this.changeLocation();
       });
     this.apiService.changeLocation(this.location);
     this.Geolocation();
