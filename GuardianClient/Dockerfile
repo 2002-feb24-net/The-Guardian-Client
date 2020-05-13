@@ -1,24 +1,59 @@
-#here we use node 12 as recommended by the documentation
-FROM node:12 as node
+# #here we use node 12 as recommended by the documentation
+# FROM node:12 as node
 
-WORKDIR /usr/src/app
+# # install chrome for protractor tests
+# RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+# RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+# RUN apt-get update && apt-get install -yq google-chrome-stable
 
-COPY package.json package-lock.json ./
+# WORKDIR /usr/src/app
 
-RUN npm ci
+# COPY package.json package-lock.json ./
 
-COPY . ./
+# RUN npm ci
 
+# COPY . ./
+
+# RUN npm install
+
+# RUN npx ng build --prod
+
+# # alpine is a tool for reducing dockerimage size for clients
+# FROM nginx:alpine
+
+# COPY --from=node usr/src/app/dist/GuardianClient /usr/share/nginx/html
+
+# # support deep linking
+# COPY nginx-custom.conf /etc/nginx/conf.d/defaultconf
+
+# base image
+FROM node:12.2.0
+
+# install chrome for protractor tests
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+RUN apt-get update && apt-get install -yq google-chrome-stable
+
+# set working directory
+WORKDIR /app
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+
+# install and cache app dependencies
+COPY package.json /app/package.json
 RUN npm install
+RUN npm install -g @angular/cli@7.3.9
 
-RUN npx ng build --prod
+# add app
+COPY . /app
 
-# alpine is a tool for reducing dockerimage size for clients
-FROM nginx:alpine
-
-COPY --from=node usr/src/app/dist/GuardianClient /usr/share/nginx/html
-
-# support deep linking
+# # support deep linking
 COPY nginx-custom.conf /etc/nginx/conf.d/defaultconf
+
+# start app
+CMD ng serve --host 0.0.0.0
+
+
 
 
